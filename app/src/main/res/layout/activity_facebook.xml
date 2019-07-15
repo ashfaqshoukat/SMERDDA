@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:weightSum="4"
+    android:orientation="vertical"
+    android:background="@color/card"
+    tools:context=".Facebook">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="end|top"
+        android:contentDescription="@null"
+        android:src="@drawable/close_window_50px" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:src="@drawable/cat"
+android:layout_gravity="center|top"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:text="SMERDA will have access to Name, Email Address \nand other public info."
+       android:textSize="17sp"
+        android:textColor="@color/darkgrey"
+        android:fontFamily="sans-serif"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="bottom"
+        android:text="Connect With Facebook"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@color/card"
+        android:background="@drawable/facebook_activity_btn"
+        />
+        </LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="6"
+    tools:context=".UploadPic">
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="2"
+    android:id="@+id/image_upload"
+    android:src="@drawable/image"
+    android:layout_marginBottom="10dp"
+    />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/cyan"
+        android:text="Choose pic"
+        android:textColor="@color/card"
+        android:id="@+id/choosePhoto"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="Enter Price"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/price_upload"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="Enter Product Name"
+        android:id="@+id/product_upload"
+
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Upload Image"
+        android:textColor="@color/card"
+        android:background="@color/cyan"
+        android:id="@+id/uploadPhoto"
+        />
+
+</LinearLayout>

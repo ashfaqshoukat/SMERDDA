@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "150202641601",
+    "firebase_url": "https://smerda-344e3.firebaseio.com",
+    "project_id": "smerda-344e3",
+    "storage_bucket": "smerda-344e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150202641601:android:f51375dfd0351342",
+        "android_client_info": {
+          "package_name": "com.example.fyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150202641601-oca3ikob4hurcp3eeg9fgp336n8t5i3t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fyp",
+            "certificate_hash": "7c6a88b8154a75ba8920e7bcdbf045fafadebd69"
+          }
+        },
+        {
+          "client_id": "150202641601-73cjkkq7t5r4al6hcd17sk4tb7p9qckj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYAyAc_tZvMcjYnfO955aBpkR1FAMcRKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150202641601-73cjkkq7t5r4al6hcd17sk4tb7p9qckj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

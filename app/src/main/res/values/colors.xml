@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="background">#FAFAFA</color>
+    <color name="darkOrange">#F74346</color>
+    <!-- green theme-->
+    <color name="card">#ffffff</color>
+    <color name="lightgrey">#F9FAFA</color>
+    <color name="grey">#D0DBDA</color>
+    <color name="green">#02C7AD</color>
+    <color name="darkgrey">#8AA09C</color>
+    <color name="cyan">#8EDDD3</color>
+    <color name="peach">#E1858A</color>
+    <color name="bar">#50ADA0</color>
+    <color name="google">#4285F4</color>
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+</resources>

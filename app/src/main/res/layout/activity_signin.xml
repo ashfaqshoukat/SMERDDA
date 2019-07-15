@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/signin_background"
+    tools:context=".signin">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/signin_layout"
+        android:weightSum="3"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="350dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:contentDescription="@null"
+                android:src="@drawable/smerdapng" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:hint="CompanyName"
+                android:paddingTop="20dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/darkgrey"
+                android:textSize="20sp"
+                android:id="@+id/companyName_signin"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/edit_text"
+                android:drawableEnd="@drawable/message_filled_30px"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingTop="20dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/darkgrey"
+                android:textSize="20sp"
+                android:id="@+id/email_signin"
+                />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/edit_text"
+                android:drawableEnd="@drawable/password_30px"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingTop="20dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/darkgrey"
+                android:textSize="20sp"
+                android:id="@+id/password_signin"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Forgot Password ?"
+                android:textColor="@color/darkgrey"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/signin_btn"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/signup_btn"
+                android:padding="15dp"
+                android:text="Login"
+                android:textColor="@color/card"
+                android:textSize="20sp"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="@null"
+                android:src="@drawable/arrow_signin"
+                android:layout_marginEnd="40dp"
+                android:id="@+id/first_signin"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_gravity="start"
+                android:contentDescription="@null"
+                android:src="@drawable/second_arrow_signin"
+                android:id="@+id/second_signin"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

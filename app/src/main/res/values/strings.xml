@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SMERDA</string>
+    <string name="signin_main_mail">Signin with Email</string>
+    <string name="signup_main_email">Signup with Email</string>
+    <string name="checkbox">I have reviewed and agree to the Terms of Services and Privacy Policy regarding the conset for the use of my personal data.</string>
+    <string name="signup_main_text">Signup below to create a secure account</string>
+    <string name="splashtxt">Welcome to this App</string>
+    <string name="cus_main_signin">Signin with Email</string>
+    <string name="cus_main_signup">Signup with Email</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/signin_background"
+    tools:context=".Customer_signin">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/signin_layout"
+        android:weightSum="4"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3.5"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="350dp"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/smerdapng"
+                android:layout_marginTop="0dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/edit_text"
+                android:hint="Email"
+                android:paddingTop="20dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/darkgrey"
+                android:drawableEnd="@drawable/message_filled_30px"
+                android:textSize="20sp"
+                android:id="@+id/cus_edit_email"
+                android:inputType="textEmailAddress"
+                />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text"
+                android:hint="Password"
+                android:paddingTop="20dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/darkgrey"
+                android:drawableEnd="@drawable/password_30px"
+                android:textSize="20sp"
+                android:id="@+id/cus_edit_pass"
+                android:inputType="textPassword"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:text="Forgot Password ?"
+                android:textSize="20sp"
+                android:textColor="@color/darkgrey"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/forgot_pass"
+                />
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="0dp"
+                android:layout_weight=".5"
+                android:layout_gravity="end"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="-50dp"
+                android:background="@drawable/signup_btn"
+                android:padding="15dp"
+                android:text="Login"
+                android:textColor="@color/card"
+                android:textSize="20sp"
+                android:id="@+id/cus_signin_btn"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="@null"
+                android:src="@drawable/arrow_signin"
+                android:layout_marginEnd="40dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_gravity="start"
+                android:contentDescription="@null"
+                android:src="@drawable/second_arrow_signin" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
