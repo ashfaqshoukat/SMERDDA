@@ -32,11 +32,13 @@ public class Fragment2 extends Fragment {
 
 
     private COMMENT comment;
-    double rating=0;
+    double rating = 0;
     AdapterUsers adapterUsers;
 
-    private List<Rating> ratingList=new ArrayList<>();
-    private List<CompanyInfo> companyInfos=new ArrayList<>();
+    private List<Rating> ratingList = new ArrayList<>();
+    private List<CompanyInfo> companyInfos = new ArrayList<>();
+    private List<CompanyInfo> companyList = new ArrayList<>();
+
     private RecyclerView recyclerView;
     List<CompanyInfo> companyInfoList = new ArrayList<>();
 
@@ -51,12 +53,13 @@ public class Fragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_fragment2, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment2, container, false);
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         getAllCompanyRating();
-        return  view;
+        getAllCompany();
+        return view;
     }
     /*
     @Override
@@ -86,28 +89,29 @@ public class Fragment2 extends Fragment {
     //5
     //4
 
-    int count=0;
-    private  void getAllCompanyRating() {
+    int count = 0;
+
+    private void getAllCompanyRating() {
         FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot comapny:dataSnapshot.child("Feedback").getChildren()){
-                    for(DataSnapshot eachCompany:comapny.getChildren()){
-                        comment=eachCompany.getValue(COMMENT.class);
-                        rating=rating+comment.getRating();
+                for (DataSnapshot comapny : dataSnapshot.child("Feedback").getChildren()) {
+                    for (DataSnapshot eachCompany : comapny.getChildren()) {
+                        comment = eachCompany.getValue(COMMENT.class);
+                        rating = rating + comment.getRating();
                         count++;
                     }
 
-                    double avrrating=rating/count;
-                    Rating rating1=new Rating();
+                    double avrrating = rating / count;
+                    Rating rating1 = new Rating();
                     rating1.setName(comment.getComapanyId());
                     rating1.setRating(avrrating);
                     ratingList.add(rating1);
-                    count=0;
-                    rating=0;
+                    count = 0;
+                    rating = 0;
                 }
-                if(ratingList!=null && ratingList.size()>0)
-                setUpRecyclerView(ratingList);
+                if (ratingList != null && ratingList.size() > 0)
+                    setUpRecyclerView();
 
             }
 
@@ -118,31 +122,51 @@ public class Fragment2 extends Fragment {
         });
     }
 
-    private void setUpRecyclerView(List<Rating> list) {
+    private void getAllCompany() {
+        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                companyList.clear();
+                for (DataSnapshot comapny : dataSnapshot.child("CompanyInfo").getChildren()) {
+                    CompanyInfo info=comapny.getValue(CompanyInfo.class);
+                    info.setCompanyId(comapny.getKey());
+                    companyList.add(info);
+                }
+                setUpRecyclerView();
+            }
 
-        Collections.sort(list, new Comparator<Rating>() {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void setUpRecyclerView() {
+
+        Collections.sort(ratingList, new Comparator<Rating>() {
             @Override
 
 
             public int compare(Rating c1, Rating c2) {
-                if (c1.getRating() <c2.getRating()) return 1;
+                if (c1.getRating() < c2.getRating()) return 1;
                 if (c1.getRating() > c2.getRating()) return -1;
                 return 0;
-            }});
+            }
+        });
 
-            FirebaseDatabase.getInstance().getReference().child("CompanyInfo").child(list.get(0).getName()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    companyInfoList.add(dataSnapshot.getValue(CompanyInfo.class));
-                    adapterUsers = new AdapterUsers(getActivity(), companyInfoList);
-                    recyclerView.setAdapter(adapterUsers);
+        for (int i = 0; i < ratingList.size(); i++) {
+            for (int j = 0; j < companyList.size(); j++) {
+                if(ratingList.get(i).getName().equalsIgnoreCase(companyList.get(j).getCompanyId())){
+                    companyInfoList.add(companyList.get(j));
+                    break;
                 }
+            }
+        }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+        adapterUsers = new AdapterUsers(getActivity(), companyInfoList);
+        recyclerView.setAdapter(adapterUsers);
 
 
 
