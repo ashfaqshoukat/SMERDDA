@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/feedback_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <ImageView
+            android:id="@+id/crossbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/white_cross_btn"
+            android:padding="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textColor="@android:color/white"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/crossbtn"
+            android:text="Feedback"/>
+    </FrameLayout>
+
+
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_below="@+id/top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+
+
+    <TextView
+        android:id="@+id/question"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="10dp"
+        android:text="Please provide feedback about the company"/>
+
+    <TextView
+
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="5dp"
+        android:text="1:-Company product quality is"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:id="@+id/productQuality"
+            android:layout_below="@+id/question"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/good"
+                android:layout_below="@+id/question"
+                android:layout_width="0dp"
+                android:text="Good"
+                style="@style/MyRadioButton"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/bad"
+                android:layout_below="@+id/question"
+                android:layout_width="0dp"
+                android:text="Bad"
+                style="@style/MyRadioButton"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/average"
+                android:layout_below="@+id/question"
+                android:layout_width="0dp"
+                android:text="Average"
+                android:checked="true"
+                style="@style/MyRadioButton"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="2:Company delivery time is"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:id="@+id/deliverytime"
+            android:layout_below="@+id/question"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/fast"
+                android:layout_below="@+id/question"
+                android:layout_width="0dp"
+                android:text="Fast"
+                style="@style/MyRadioButton"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/slow"
+                android:layout_below="@+id/question"
+                android:layout_width="0dp"
+                android:text="Slow"
+                style="@style/MyRadioButton"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/normal"
+                android:layout_below="@+id/question"
+                android:layout_width="0dp"
+                android:text="Normal"
+                style="@style/MyRadioButton"
+                android:checked="true"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:text="3:Company response time is"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:id="@+id/responsetime"
+            android:layout_below="@+id/question"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/quickly"
+                android:layout_below="@+id/question"
+                android:layout_width="0dp"
+                android:text="Quickly"
+                style="@style/MyRadioButton"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/late"
+                android:layout_below="@+id/question"
+                android:layout_width="0dp"
+                android:text="Late"
+                style="@style/MyRadioButton"
+                android:layout_weight="1"
+                android:checked="true"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:text="4:Are you happy by company"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:id="@+id/happy"
+            android:layout_below="@+id/question"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/yes"
+                android:layout_below="@+id/question"
+                android:layout_width="0dp"
+                android:text="Yes"
+                style="@style/MyRadioButton"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/no"
+                android:layout_below="@+id/question"
+                android:layout_width="0dp"
+                android:text="No"
+                android:checked="true"
+                style="@style/MyRadioButton"
+                android:enabled="true"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/sendbtn"
+        android:textColor="@color/white"
+        android:text="SUBMIT"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:background="@drawable/sign_up_corner_bend"
+        android:layout_alignParentRight="true"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:textSize="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        />
+
+
+</LinearLayout>
+</RelativeLayout>

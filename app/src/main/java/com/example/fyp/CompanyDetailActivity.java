@@ -2,7 +2,9 @@ package com.example.fyp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -34,29 +36,50 @@ import java.util.List;
 
 public class CompanyDetailActivity extends AppCompatActivity implements RatingDialogListener {
 
+    private static Context instance;
     CompanyInfo companyInfo;
-    TextView comapnayName, comapanyEmail, feebackBtn;
+    TextView comapnayName, comapanyEmail, feebackBtn,rateCompany;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private List<CompanyInfo> companyInfolist;
     private List<com.example.fyp.Rating> ratingList = new ArrayList<>();
 
+    public static Context geInstance() {
+        return  instance;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_detail);
+        instance=this;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
         comapnayName = findViewById(R.id.comapnyname);
         comapanyEmail = findViewById(R.id.email);
         feebackBtn = findViewById(R.id.feebackBtn);
+        rateCompany = findViewById(R.id.ratecompany);
         feebackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog();
+
+//                showDialog();
+                FragmentManager fm = getSupportFragmentManager();
+                FeedbackDialog editNameDialogFragment = new FeedbackDialog();
+                editNameDialogFragment.show(fm, "Feedback Dialog");
+
             }
         });
 
+        rateCompany.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                showDialog();
+
+
+            }
+        });
         String info = getIntent().getExtras().getString("comapnyinfo");
 //        String infolist = getIntent().getExtras().getString("comapnyinfolist");
 //        Type type = new TypeToken<List<CompanyInfo>>() {}.getType();
@@ -162,23 +185,29 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
 
 
     double rating = 0;
+    int count=0;
     COMMENT comment;
 
     private void getAllCompanyRating() {
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ratingList.clear();
                 for (DataSnapshot comapny : dataSnapshot.child("Feedback").getChildren()) {
                     for (DataSnapshot eachCompany : comapny.getChildren()) {
                         comment = eachCompany.getValue(COMMENT.class);
                         rating = rating + comment.getRating();
+                        count++;
 
                     }
-
+                    double avgrating=0;
+                    if(count!=0)
+                     avgrating=rating/count;
                     Rating rating1 = new Rating();
                     rating1.setName(comment.getComapnayName());
-                    rating1.setRating(rating);
+                    rating1.setRating(avgrating);
                     ratingList.add(rating1);
+                    rating = 0;
                 }
                 showPieChart(ratingList);
             }

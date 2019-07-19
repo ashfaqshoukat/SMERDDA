@@ -12,6 +12,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.Window;
 
+import static android.icu.text.Normalizer.YES;
+
 public class Homepage extends AppCompatActivity {
     Window window;
     Toolbar toolbar;
@@ -36,6 +38,9 @@ public class Homepage extends AppCompatActivity {
         adapter.addFragment(new BlankFragment(),"Notification");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+
+
     }
 
         public boolean onCreateOptionsMenu(Menu menu) {

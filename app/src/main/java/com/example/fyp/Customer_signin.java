@@ -28,6 +28,7 @@ String email,password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_customer_signin);
         et_cus_email= findViewById(R.id.cus_edit_email);
         et_cus_pass= findViewById(R.id.cus_edit_pass);

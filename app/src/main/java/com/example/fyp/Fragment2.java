@@ -104,6 +104,7 @@ public class Fragment2 extends Fragment {
                     rating1.setRating(avrrating);
                     ratingList.add(rating1);
                     count=0;
+                    rating=0;
                 }
                 if(ratingList!=null && ratingList.size()>0)
                 setUpRecyclerView(ratingList);
