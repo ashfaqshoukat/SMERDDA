@@ -2,7 +2,7 @@ package com.example.fyp;
 
 public class COMMENT
 {
-    private String message,comapnayName,comapanyId;
+    private String message,comapnayName,comapanyId,userId;
     private int rating;
     private  long date;
 
@@ -44,6 +44,14 @@ public class COMMENT
 
     public String getComapanyId() {
         return comapanyId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public void setComapanyId(String comapanyId) {

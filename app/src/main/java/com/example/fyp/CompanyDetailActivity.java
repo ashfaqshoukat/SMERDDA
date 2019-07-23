@@ -19,6 +19,8 @@ import com.anychart.chart.common.listener.ListenersInterface;
 import com.anychart.charts.Pie;
 import com.anychart.enums.Align;
 import com.anychart.enums.LegendLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,21 +40,21 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
 
     private static Context instance;
     CompanyInfo companyInfo;
-    TextView comapnayName, comapanyEmail, feebackBtn,rateCompany;
+    TextView comapnayName, comapanyEmail, feebackBtn, rateCompany;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private List<CompanyInfo> companyInfolist;
     private List<com.example.fyp.Rating> ratingList = new ArrayList<>();
 
     public static Context geInstance() {
-        return  instance;
+        return instance;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_detail);
-        instance=this;
+        instance = this;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
         comapnayName = findViewById(R.id.comapnyname);
@@ -75,7 +77,34 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
             @Override
             public void onClick(View view) {
 
-                showDialog();
+                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child("Feedback");
+                rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChild(companyInfo.getCompanyId())) {
+
+                            for (DataSnapshot feedback : dataSnapshot.child(companyInfo.getCompanyId()).getChildren()) {
+                                COMMENT comment = feedback.getValue(COMMENT.class);
+                                if (comment.getUserId().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                    Toast.makeText(CompanyDetailActivity.this, "You have already submitted feedback", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    showDialog();
+                                }
+                            }
+
+
+                        }
+                        else{
+                            showDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
 
             }
@@ -178,6 +207,7 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         comment.setMessage(s);
         comment.setComapnayName(companyInfo.getCompName());
         comment.setComapanyId(companyInfo.getCompanyId());
+        comment.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
         comment.setDate(System.currentTimeMillis());
         myRef.child("Feedback").child(companyInfo.getCompanyId()).child(System.currentTimeMillis() + "").setValue(comment);
 
@@ -185,7 +215,7 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
 
 
     double rating = 0;
-    int count=0;
+    int count = 0;
     COMMENT comment;
 
     private void getAllCompanyRating() {
@@ -200,14 +230,15 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
                         count++;
 
                     }
-                    double avgrating=0;
-                    if(count!=0)
-                     avgrating=rating/count;
+                    double avgrating = 0;
+                    if (count != 0)
+                        avgrating = rating / count;
                     Rating rating1 = new Rating();
                     rating1.setName(comment.getComapnayName());
                     rating1.setRating(avgrating);
                     ratingList.add(rating1);
                     rating = 0;
+                    count=0;
                 }
                 showPieChart(ratingList);
             }
