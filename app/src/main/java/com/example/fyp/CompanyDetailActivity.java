@@ -19,6 +19,8 @@ import com.anychart.chart.common.listener.ListenersInterface;
 import com.anychart.charts.Pie;
 import com.anychart.enums.Align;
 import com.anychart.enums.LegendLayout;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +45,7 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
     TextView comapnayName, comapanyEmail, feebackBtn, rateCompany;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
+    int check=0;
     private List<CompanyInfo> companyInfolist;
     private List<com.example.fyp.Rating> ratingList = new ArrayList<>();
 
@@ -73,6 +76,7 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
             }
         });
 
+
         rateCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,22 +85,28 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
                 rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                         if (dataSnapshot.hasChild(companyInfo.getCompanyId())) {
 
                             for (DataSnapshot feedback : dataSnapshot.child(companyInfo.getCompanyId()).getChildren()) {
                                 COMMENT comment = feedback.getValue(COMMENT.class);
                                 if (comment.getUserId().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                     Toast.makeText(CompanyDetailActivity.this, "You have already submitted feedback", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    showDialog();
+                                    check=check+1;
                                 }
                             }
 
 
                         }
                         else{
-                            showDialog();
+                            check=0;
                         }
+
+                        if(check==0){
+                            showDialog();
+
+                        }
+                        check=0;
                     }
 
                     @Override
@@ -107,8 +117,10 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
 
 
 
+
             }
         });
+
         String info = getIntent().getExtras().getString("comapnyinfo");
 //        String infolist = getIntent().getExtras().getString("comapnyinfolist");
 //        Type type = new TypeToken<List<CompanyInfo>>() {}.getType();
@@ -164,10 +176,9 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
 
 
     private void showDialog() {
-        new AppRatingDialog.Builder()
+       new AppRatingDialog.Builder()
                 .setPositiveButtonText("Submit")
                 .setNegativeButtonText("Cancel")
-                .setNeutralButtonText("Later")
                 .setNoteDescriptions(Arrays.asList("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
                 .setDefaultRating(2)
                 .setTitle("Rate this Compnay")
@@ -209,7 +220,18 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         comment.setComapanyId(companyInfo.getCompanyId());
         comment.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
         comment.setDate(System.currentTimeMillis());
-        myRef.child("Feedback").child(companyInfo.getCompanyId()).child(System.currentTimeMillis() + "").setValue(comment);
+        myRef.child("Feedback").child(companyInfo.getCompanyId()).child(System.currentTimeMillis() + "").setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(CompanyDetailActivity.this, "Rating upload successfully", Toast.LENGTH_SHORT).show();
+                    getAllCompanyRating();
+                }
+            }
+        });
+
+
+
 
     }
 

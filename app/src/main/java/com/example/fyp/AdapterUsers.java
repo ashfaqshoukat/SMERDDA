@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import java.util.List;
 public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.myHolder> {
     Context context;
     ArrayList<CompanyInfo> list;
+
 
     public AdapterUsers(Context context, List<CompanyInfo> list) {
         this.context = context;
@@ -40,16 +42,13 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.myHolder> {
     public void onBindViewHolder(@NonNull myHolder myHolder, int i) {
         String companyName = list.get(i).getCompName();
         myHolder.textView.setText(companyName);
-        myHolder.textView.setOnClickListener(new View.OnClickListener() {
+        myHolder.itemLyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context,CompanyDetailActivity.class);
-//                Type type = new TypeToken<List<CompanyInfo>>() {}.getType();
-                Gson gson=new Gson();
-                String data=gson.toJson(list.get(i));
-//                String listDta=gson.toJson(list,type);
-                intent.putExtra("comapnyinfo",data);
-//                intent.putExtra("comapnyinfolist",listDta);
+                Intent intent = new Intent(context, CompanyDetailActivity.class);
+                Gson gson = new Gson();
+                String data = gson.toJson(list.get(i));
+                intent.putExtra("comapnyinfo", data);
                 context.startActivity(intent);
             }
         });
@@ -63,11 +62,13 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.myHolder> {
     class myHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView textView;
+        LinearLayout itemLyt;
 
         public myHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imgIv);
             textView = itemView.findViewById(R.id.nameTv);
+            itemLyt = itemView.findViewById(R.id.itemLyt);
         }
     }
 }

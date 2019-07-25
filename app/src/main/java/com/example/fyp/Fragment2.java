@@ -57,8 +57,7 @@ public class Fragment2 extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getAllCompanyRating();
-        getAllCompany();
+
         return view;
     }
     /*
@@ -89,12 +88,15 @@ public class Fragment2 extends Fragment {
     //5
     //4
 
+
     int count = 0;
 
     private void getAllCompanyRating() {
         FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ratingList.clear();
+                companyInfoList.clear();
                 for (DataSnapshot comapny : dataSnapshot.child("Feedback").getChildren()) {
                     for (DataSnapshot eachCompany : comapny.getChildren()) {
                         comment = eachCompany.getValue(COMMENT.class);
@@ -127,6 +129,7 @@ public class Fragment2 extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 companyList.clear();
+                companyInfoList.clear();
                 for (DataSnapshot comapny : dataSnapshot.child("CompanyInfo").getChildren()) {
                     CompanyInfo info=comapny.getValue(CompanyInfo.class);
                     info.setCompanyId(comapny.getKey());
@@ -172,4 +175,11 @@ public class Fragment2 extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getAllCompanyRating();
+        getAllCompany();
+
+    }
 }
