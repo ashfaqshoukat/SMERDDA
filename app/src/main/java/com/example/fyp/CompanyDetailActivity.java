@@ -133,14 +133,14 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
 
     private void showPieChart(List<Rating> ratingListt) {
         AnyChartView anyChartView = findViewById(R.id.picchart);
-//        anyChartView.setProgressBar(findViewById(R.id.progress_bar));
+
 
         Pie pie = AnyChart.pie();
 
         pie.setOnClickListener(new ListenersInterface.OnClickListener(new String[]{"x", "value"}) {
             @Override
             public void onClick(Event event) {
-                Toast.makeText(CompanyDetailActivity.this, event.getData().get("x") + ":" + event.getData().get("value"), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CompanyDetailActivity.this, event.getData().get("x") + ":" + event.getData().get("value"), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -149,12 +149,6 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         for (int i = 0; i < ratingListt.size(); i++) {
             data.add(new ValueDataEntry(ratingListt.get(i).getName(), ratingListt.get(i).getRating()));
         }
-//        data.add(new ValueDataEntry("Apples", 6371664));
-//        data.add(new ValueDataEntry("Pears", 789622));
-//        data.add(new ValueDataEntry("Bananas", 7216301));
-//        data.add(new ValueDataEntry("Grapes", 1486621));
-//        data.add(new ValueDataEntry("Oranges", 1200000));
-
         pie.data(data);
 
         pie.title("Comapny Liked By customer");
