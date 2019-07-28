@@ -12,7 +12,7 @@ public class CustomerInfo {
         this.phone = phone;
         this.address = address;
         this.password = password;
-        this.profileimage = profileimage;
+        this.profileimage = "";
     }
 
     public String getUsername() {

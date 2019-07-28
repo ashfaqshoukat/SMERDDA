@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -100,8 +102,8 @@ StorageTask mUploadTask;
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                   Toast.makeText(UploadPic.this,"Upload successfully",Toast.LENGTH_SHORT).show();
                   Gallery gallery=new Gallery(edit_name.getText().toString().trim(),edit_price.getText().toString().trim(),taskSnapshot.getUploadSessionUri().toString());
-                  String uploadId=databaseReference.push().getKey();
-                  databaseReference.child(uploadId).setValue(gallery);
+                  String uploadId= FirebaseAuth.getInstance().getUid();
+                  databaseReference.child(uploadId).child(SystemClock.currentThreadTimeMillis()+"").setValue(gallery);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
