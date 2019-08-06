@@ -13,50 +13,51 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CompanyDetailActivity"></activity>
-        <activity android:name=".AddressDetail" />
+        <activity android:name=".Activities.CompanyProductActivity"></activity>
+        <activity android:name=".Activities.CompanyDetailActivity" />
+        <activity android:name=".Activities.AddressDetail" />
         <activity
-            android:name=".ConfirmActivity"
+            android:name=".Activities.ConfirmActivity"
             android:theme="@style/SpashScreen.Popup" />
-        <activity android:name=".UploadPic" />
-        <activity android:name=".ShopActivity" />
+        <activity android:name=".Activities.UploadPic" />
+        <activity android:name=".Activities.ShopActivity" />
         <activity
-            android:name=".CompanyProfile"
+            android:name=".Activities.CompanyProfile"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".Customer_forgot"
+            android:name=".Activities.Customer_forgot"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".Customer_profile"
+            android:name=".Activities.Customer_profile"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".Homepage"
+            android:name=".Activities.Homepage"
             android:label="SMERDA"
             android:textColor="#ffffffff"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".Customer_signin"
+            android:name=".Activities.Customer_signin"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".Customer_signup"
+            android:name=".Activities.Customer_signup"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".signin"
+            android:name=".Activities.signin"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".signup"
+            android:name=".Activities.signup"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".Cus_main_signup"
+            android:name=".Activities.Cus_main_signup"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".SignupHome"
+            android:name=".Activities.SignupHome"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".choose"
+            android:name=".Activities.ChooseActivity"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.SplashActivity"
             android:theme="@style/SpashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

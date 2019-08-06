@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layout_weight="4"
     android:background="@color/card"
-    tools:context=".SignupHome">
+    tools:context=".Activities.SignupHome">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

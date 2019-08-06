@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CompanyProfile"
+    tools:context=".Activities.CompanyProfile"
     android:weightSum="6">
 
     <LinearLayout
@@ -113,6 +113,7 @@ android:paddingEnd="20dp"
                     android:textColor="@color/darkgrey"
                     android:drawablePadding="30dp"
                     android:text="Call"
+                    android:id="@+id/phoneNo"
                     android:layout_gravity="end|center"
 
                     />

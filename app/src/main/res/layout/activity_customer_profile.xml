@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Customer_profile"
+    tools:context=".Activities.Customer_profile"
     android:background="@color/background"
     android:weightSum="5"
     >
