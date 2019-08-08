@@ -57,6 +57,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.stepstone.apprating:app-rating:2.3.1'
     implementation 'com.muddzdev:styleabletoast:2.2.2'
+    implementation 'com.google.firebase:firebase-messaging:19.0.1'
+
 
 }
 realm {

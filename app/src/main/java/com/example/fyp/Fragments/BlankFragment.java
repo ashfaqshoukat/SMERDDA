@@ -1,7 +1,9 @@
 package com.example.fyp.Fragments;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -13,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.fyp.R;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,21 +45,46 @@ public class BlankFragment extends Fragment {
         return view;
     }
     private void displayNotification(){
-        NotificationManager manager1= (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder builder=new NotificationCompat.Builder(context,CHANEL_ID)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setContentTitle("It is working")
-                .setContentText("Your first Notification")
-                .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        manager1.notify(11,builder.build());
-        // NotificationManagerCompat notificationManagerCompat=NotificationManagerCompat.from(context);
-        //notificationManagerCompat.notify(1,builder.build());
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            NotificationChannel channel=new NotificationChannel(CHANEL_ID,CHANEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription(CHANEL_DESC);
-            manager1.createNotificationChannel(channel);
+        // This is the Notification Channel ID. More about this in the next section
+          final String NOTIFICATION_CHANNEL_ID = "channel_id";
 
+//User visible Channel Name
+          final String CHANNEL_NAME = "Notification Channel";
+
+// Importance applicable to all the notifications in this Channel
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+//Notification channel should only be created for devices running Android 26
+        NotificationChannel notificationChannel = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+             notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, CHANNEL_NAME, importance);
+
+            //Boolean value to set if lights are enabled for Notifications from this Channel
+            notificationChannel.enableLights(true);
+
+            //Boolean value to set if vibration are enabled for Notifications from this Channel
+            notificationChannel.enableVibration(true);
+
+            //Sets the color of Notification Light
+            notificationChannel.setLightColor(Color.GREEN);
+
+            //Set the vibration pattern for notifications. Pattern is in milliseconds with the format {delay,play,sleep,play,sleep...}
+            notificationChannel.setVibrationPattern(new long[] {
+                    500,
+                    500,
+                    500,
+                    500,
+                    500
+            });
+
+            //Sets whether notifications from these Channel should be visible on Lockscreen or not
+            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+        }
+
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager.createNotificationChannel(notificationChannel);
         }
 
     }
