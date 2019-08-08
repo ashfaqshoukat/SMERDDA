@@ -1,5 +1,4 @@
 package com.example.fyp.Adapters;
-
 import android.content.Context;
 
 import android.content.Intent;
@@ -21,17 +20,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.myHolder> {
     Context context;
     ArrayList<COMPANYINFO> list;
-
-
     public CompanyAdapter(Context context, List<COMPANYINFO> list) {
         this.context = context;
         this.list = (ArrayList<COMPANYINFO>) list;
     }
-
     @NonNull
     @Override
     public myHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -39,7 +34,6 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.myHolder
         View view = LayoutInflater.from(context).inflate(R.layout.company_profile_tab, viewGroup, false);
         return new myHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull myHolder myHolder, int i) {
         COMPANYINFO company = list.get(i);

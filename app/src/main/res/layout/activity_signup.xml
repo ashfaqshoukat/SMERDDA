@@ -26,22 +26,12 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@null"
-                    android:src="@drawable/google_circle_button"
-                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    />
-
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="-80dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
                     android:contentDescription="@null"
                     android:src="@drawable/arrow_circle"
                     android:id="@+id/first_signup"
@@ -56,14 +46,6 @@
                     android:src="@drawable/second_arow_signup"
                     android:id="@+id/second_signup"
                     />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="50dp"
-                    android:contentDescription="@null"
-                    android:src="@drawable/facrbook_signup_btn" />
 
         </LinearLayout>
 

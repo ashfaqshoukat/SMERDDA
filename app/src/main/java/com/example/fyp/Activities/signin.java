@@ -13,46 +13,66 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.fyp.Database.CompnayNameRealm;
+import com.example.fyp.Activities.CompanyProfile;
+import com.example.fyp.Activities.signup;
+import com.example.fyp.Database.HelperProfile;
 import com.example.fyp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 public class signin extends AppCompatActivity {
     Window window;
-Button Signin;
-ImageView first,second;
-FirebaseAuth mAth;
-EditText edit_company,edit_email,edit_pass;
-FirebaseUser firebaseUser;
+    Button Signin;
+    ImageView first,second;
+    FirebaseAuth mAth;
+    EditText edit_company,edit_email,edit_pass;
+    FirebaseUser firebaseUser;
     String company,email,password;
+    String Name =  "";
+
+    List<String> lstName = new ArrayList<String>();
+    List<String> lstEmail = new ArrayList<String>();
+
+    HelperProfile objName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-        Signin= findViewById(R.id.signin_btn);
-        first= findViewById(R.id.first_signin);
-        second= findViewById(R.id.second_signin);
-        edit_company= findViewById(R.id.companyName_signin);
-        edit_email= findViewById(R.id.email_signin);
-        edit_pass= findViewById(R.id.password_signin);
+        Signin=(Button)findViewById(R.id.signin_btn);
+        first=(ImageView)findViewById(R.id.first_signin);
+        second=(ImageView)findViewById(R.id.second_signin);
+        edit_company=(EditText)findViewById(R.id.companyName_signin);
+        edit_email=(EditText)findViewById(R.id.email_signin);
+        edit_pass=(EditText)findViewById(R.id.password_signin);
         mAth=FirebaseAuth.getInstance();
         firebaseUser=mAth.getCurrentUser();
+        objName = new HelperProfile(signin.this);
 
-        InitRealmConfig();
         if (firebaseUser!=null){
             finish();
-            startActivity(new Intent(signin.this, CompanyProfile.class));
+            startActivity(new Intent(signin.this,CompanyProfile.class));
         }
         if(Build.VERSION.SDK_INT>=21){
             window=this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.bar));
         }
+
         Signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +80,7 @@ FirebaseUser firebaseUser;
                 email=edit_email.getText().toString();
                 password=edit_pass.getText().toString();
                 if (TextUtils.isEmpty(company)){
-                   edit_company.setError("Email Required");
+                    edit_company.setError("Email Required");
                     edit_company.requestFocus();
                 }
                 if (TextUtils.isEmpty(email)){
@@ -77,19 +97,17 @@ FirebaseUser firebaseUser;
 
                 }
 
-                String sCompnyName =GetCompnayName();
 
-//                if (! company.equals(sCompnyName))
-//                {
-//                    Toast.makeText(signin.this,"Compnay name not matched !",Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
+
+
 
                 mAth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                             checkEmailVerification();
+                            MatchMulitCompnayName();
+
+
                         }
                         else {
                             Toast.makeText(signin.this,"Login failed",Toast.LENGTH_SHORT).show();
@@ -118,61 +136,95 @@ FirebaseUser firebaseUser;
                 finish();
             }
         });
-
     }
     public void onBackPressed(){
         super.onBackPressed();
         overridePendingTransition(R.anim.slideout_right,R.anim.slide_left);
     }
-    private void checkEmailVerification(){
+    private Boolean checkEmailVerification()
+    {
 
-        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+
+        FirebaseUser firebaseUser=mAth.getInstance().getCurrentUser();
         Boolean emailFlag=firebaseUser.isEmailVerified();
         if (emailFlag){
-            startActivity(new Intent(signin.this,CompanyProfile.class));
+            //startActivity(new Intent(signin.this,CompanyProfile.class));
+            return true;
 
         }
         else {
             Toast.makeText(signin.this,"Verify your Email",Toast.LENGTH_SHORT).show();
             mAth.signOut();
         }
+        return false;
     }
-    private void InitRealmConfig(){
-
-        // initialize Realm
-        Realm.init(getApplicationContext());
-
-        // create your Realm configuration
-        RealmConfiguration config = new RealmConfiguration.
-                Builder().
-                deleteRealmIfMigrationNeeded().
-                build();
-        Realm.setDefaultConfiguration(config);
-    }
-
-    private String GetCompnayName()
+    private void MatchMulitCompnayName()
     {
-        Realm realmDB=Realm.getDefaultInstance();
-        String sName = "";
 
-        RealmResults<CompnayNameRealm> userSchedules=realmDB.where(CompnayNameRealm.class).findAll();
+        DatabaseReference ref1= FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref2;
+        ref2 = ref1.child("CompanyInfo");
 
-        if(userSchedules.size() == 0)
-        {
-            Toast.makeText(this,"No Record Found", Toast.LENGTH_SHORT).show();
-            return "0";
 
-        }
+        ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        for (CompnayNameRealm userSchedule:userSchedules)
-        {
 
-            sName = userSchedule.getsCompnayName();
-        }
+                for (DataSnapshot dsp : dataSnapshot.getChildren())
+                {
+                    String sKey =dsp.getKey();
+                    String sCompnayName =  String.valueOf(dsp.child("compName").getValue());
+                    String sEmail =  String.valueOf(dsp.child("email").getValue());
 
-        return sName;
+
+                    lstName.add(sCompnayName);
+                    lstEmail.add(sEmail);
+
+                }
+
+
+
+                String  sCompnayName;
+                String  sEmail;
+                int nCounter = 0;
+
+                Boolean bResult= checkEmailVerification();
+
+                while (nCounter < lstName.size())
+                {
+                    sCompnayName = lstName.get(nCounter);
+                    sEmail = lstEmail.get(nCounter);
+
+                    if (sCompnayName.equals(edit_company.getText().toString()) && bResult == true  && sEmail.equals(edit_email.getText().toString()))
+                    {
+
+                        objName.DeleteName();
+                        objName.InsertCompnayName(edit_company.getText().toString());
+
+                        startActivity(new Intent(signin.this, CompanyProfile.class));
+
+
+                        break;
+
+                    }
+
+                    nCounter ++;
+                }
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
-
 
 
 }

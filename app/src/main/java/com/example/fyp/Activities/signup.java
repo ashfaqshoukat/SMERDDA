@@ -2,29 +2,35 @@ package com.example.fyp.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.fyp.Database.CompnayNameRealm;
-import com.example.fyp.Extras.PreferanceFile;
+import com.example.fyp.Activities.signin;
+import com.example.fyp.Database.HelperProfile;
 import com.example.fyp.Models.COMPANYINFO;
 import com.example.fyp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +38,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.realm.Realm;
@@ -43,10 +51,6 @@ public class signup extends AppCompatActivity {
     Window window;
     Button Signup;
     ImageView signup_first, signup_second;
-
-
-
-
     ProgressDialog progressBar;
 
     EditText et_CompnayName, et_Email, et_Password, et_repass,et_phonenbr;
@@ -59,30 +63,24 @@ public class signup extends AppCompatActivity {
     String company, email, password, repass;
 
     List<String> dataList = new ArrayList<String>();
-
+    HelperProfile objHelper;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        Signup = findViewById(R.id.signup_btn);
-        signup_first = findViewById(R.id.first_signup);
-        signup_second = findViewById(R.id.second_signup);
-        et_CompnayName = findViewById(R.id.company);
-        et_Email = findViewById(R.id.email);
-        et_Password = findViewById(R.id.password);
-        et_repass = findViewById(R.id.re_pass);
+        Signup = (Button) findViewById(R.id.signup_btn);
+        signup_first = (ImageView) findViewById(R.id.first_signup);
+        signup_second = (ImageView) findViewById(R.id.second_signup);
+        et_CompnayName = (EditText) findViewById(R.id.company);
+        et_Email = (EditText) findViewById(R.id.email);
+        et_Password = (EditText) findViewById(R.id.password);
+        et_repass = (EditText) findViewById(R.id.re_pass);
         et_phonenbr = findViewById(R.id.phoneNo);
-         InitRealmConfig();
-
         databaseReference = FirebaseDatabase.getInstance().getReference("CompanyInfo");
-
         obj_CompnayName = FirebaseDatabase.getInstance().getReference("Companies");
-
         firebaseAuth = FirebaseAuth.getInstance();
-
-
 
 
 
@@ -98,8 +96,7 @@ public class signup extends AppCompatActivity {
                 Boolean bResult = ValidationUI();
                 if (bResult == true)
                 {
-
-                MatchMulitCompnayName();
+                    MatchMulitCompnayName();
 
                     progressBar = new ProgressDialog(signup.this);
                     progressBar.setCancelable(false);
@@ -107,9 +104,6 @@ public class signup extends AppCompatActivity {
                     progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progressBar.show();
                 }
-
-
-
 
             }
         });
@@ -150,9 +144,6 @@ public class signup extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful())
                     {
-
-
-
                         Toast.makeText(signup.this, "Registration successfully Completed", Toast.LENGTH_SHORT).show();
                         progressBar.dismiss();
                         firebaseAuth.signOut();
@@ -166,51 +157,17 @@ public class signup extends AppCompatActivity {
         }
     }
 
-    private void InitRealmConfig(){
+    FirebaseDatabase m_Fir_Database;
+    DatabaseReference m_Fir_Reference;
 
-        // initialize Realm
-        Realm.init(getApplicationContext());
-
-        // create your Realm configuration
-        RealmConfiguration config = new RealmConfiguration.
-                Builder().
-                deleteRealmIfMigrationNeeded().
-                build();
-        Realm.setDefaultConfiguration(config);
-    }
-
-    public  void SaveCompnayRealm(String name)
+    private void SaveToCloudCompmay( String sCompnayName)
     {
 
-        DelleteName();
+        //String sDeviceName = getDeviceName();
+        m_Fir_Database = FirebaseDatabase.getInstance();
+        m_Fir_Reference= FirebaseDatabase.getInstance().getReference().child("MatchString").child(sCompnayName);
 
-        Realm realmDB=Realm.getDefaultInstance();
-
-        try{
-            realmDB.beginTransaction();
-            CompnayNameRealm objRealm = realmDB.createObject(CompnayNameRealm.class);
-            objRealm.setsCompnayName(name);
-
-            realmDB.commitTransaction();
-        }
-        catch (Exception ex){
-
-            Toast.makeText(this, "Error in realm", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-
-    public void DelleteName()
-    {
-        Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.delete(CompnayNameRealm.class);
-            }
-        });
-
+        m_Fir_Reference.setValue(sCompnayName);
     }
 
     private Boolean ValidationUI()
@@ -233,12 +190,6 @@ public class signup extends AppCompatActivity {
         }
         if (TextUtils.isEmpty(password)) {
             et_Password.setError("Password required");
-            et_Password.requestFocus();
-
-            return false;
-        }
-        if (TextUtils.isEmpty(et_phonenbr.getText().toString())) {
-            et_Password.setError("Phone no required");
             et_Password.requestFocus();
 
             return false;
@@ -267,7 +218,7 @@ public class signup extends AppCompatActivity {
             return false;
         }
 
-       SaveCompnayRealm(et_CompnayName.getText().toString());
+        SaveToCloudCompmay(et_CompnayName.getText().toString());
 
         return true;
     }
@@ -279,11 +230,9 @@ public class signup extends AppCompatActivity {
 
         if (sCompnayName.equals(et_CompnayName.getText().toString()))
         {
-//            SaveData();
+            SaveData();
             return;
         }
-
-
         if (!sCompnayName.equals(et_CompnayName.getText().toString()))
         {
 
@@ -294,7 +243,9 @@ public class signup extends AppCompatActivity {
 
                 if (sCompnayName.equals(et_CompnayName.getText().toString()))
                 {
-//                    SaveData();
+                    SaveData(); //work
+
+
                     break;
 
                 }
@@ -323,17 +274,15 @@ public class signup extends AppCompatActivity {
                     Toast.makeText(signup.this, "Choose different company name,this company already exist", Toast.LENGTH_SHORT).show();
                     progressBar.dismiss();
                 } else {
-
                     firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                               // String uid=firebaseAuth.getCurrentUser().getUid();
                                 final COMPANYINFO companyInfo = new COMPANYINFO(company, email, password);
                                 companyInfo.setProfileimage("");
                                 companyInfo.setPhonenbr(et_phonenbr.getText().toString());
                                 companyInfo.setAbout(about);
-                               // FirebaseDatabase.getInstance().getReference("COMPANYINFO").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(uid).setValue(companyInfo);
+                                // FirebaseDatabase.getInstance().getReference("COMPANYINFO").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(uid).setValue(companyInfo);
                                 FirebaseDatabase.getInstance().getReference("CompanyInfo").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(companyInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -342,6 +291,7 @@ public class signup extends AppCompatActivity {
                                         {
                                             sendCompanyEmailVerification();
                                             addcheckinfo();
+
 
 
                                         }
@@ -368,26 +318,15 @@ public class signup extends AppCompatActivity {
 
     }
 
-    private void addcheckinfo() {
-
-
-        FirebaseDatabase.getInstance().getReference().child("checkinfo").child(FirebaseAuth.getInstance().getUid()).child("info").setValue("company");
-
-    }
-
-
     private void MatchMulitCompnayName()
     {
 
         DatabaseReference ref1= FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref2;
         ref2 = ref1.child("Companies");
-
-
         ref2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
 
 
                 for (DataSnapshot dsp : dataSnapshot.getChildren())
@@ -395,20 +334,11 @@ public class signup extends AppCompatActivity {
                     String sKey =dsp.getKey();
                     String sValue =  String.valueOf(dsp.child("companyName").getValue());
 
-
-                    if(sValue.equalsIgnoreCase(et_CompnayName.getText().toString())){
-                        SaveData(String.valueOf(dsp.child("About").getValue()));
-                        return;
-
-                    }
-
-
-//                    dataList.add(sValue); //add result into array list
+                    dataList.add(sValue); //add result into array list
 
                 }
-                Toast.makeText(signup.this, "Compnay Record not Found", Toast.LENGTH_SHORT).show();
 
-//                CompnayNames();
+                CompnayNames();
 
 
 
@@ -421,41 +351,12 @@ public class signup extends AppCompatActivity {
         });
 
     }
+    private void addcheckinfo() {
 
 
-
-    public void CompanyInfo() {
-
-        DatabaseReference ref = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child("CompanyInfo");
-
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot zoneSnapshot : snapshot.getChildren()) {
-
-                    //   sCompnyInfoName = zoneSnapshot.child("compName").getValue().toString();
-
-
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-
-        });
-
+        FirebaseDatabase.getInstance().getReference().child("checkinfo").child(FirebaseAuth.getInstance().getUid()).child("info").setValue("company");
 
     }
-
     public String getMessage(){
         final AtomicBoolean done = new AtomicBoolean(false);
         final String[] message1 = new String[0];

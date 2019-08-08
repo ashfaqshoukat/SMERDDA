@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="6"
+    android:weightSum="7"
     tools:context=".Activities.UploadPic">
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="2"
-    android:id="@+id/image_upload"
-    android:src="@drawable/image"
-    android:layout_marginBottom="10dp"
-    />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:id="@+id/image_upload"
+        android:src="@drawable/image"
+        android:layout_marginBottom="10dp"
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -28,19 +28,27 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:hint="Enter Price"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/price_upload"
+        android:hint="Enter Product Name"
+        android:id="@+id/product_upload"
+
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:hint="Enter Product Name"
-        android:id="@+id/product_upload"
-
+        android:hint="Enter Price"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/price_upload"
         />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="Product Description"
+        android:id="@+id/descriptionProduct"
+
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"

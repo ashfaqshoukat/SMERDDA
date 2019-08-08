@@ -1,15 +1,16 @@
 package com.example.fyp.Models;
 
 public class GALLERY {
-    String product_title, product_price, product_image;
+    String product_title, product_price, product_image,product_description;
 
     public GALLERY() {
     }
 
-    public GALLERY(String product_title, String product_price, String product_image) {
+    public GALLERY(String product_title, String product_price, String product_image, String product_description) {
         this.product_title = product_title;
         this.product_price = product_price;
         this.product_image = product_image;
+        this.product_description = product_description;
     }
 
     public String getProduct_title() {
@@ -34,5 +35,13 @@ public class GALLERY {
 
     public void setProduct_image(String product_image) {
         this.product_image = product_image;
+    }
+
+    public String getProduct_description() {
+        return product_description;
+    }
+
+    public void setProduct_description(String product_description) {
+        this.product_description = product_description;
     }
 }

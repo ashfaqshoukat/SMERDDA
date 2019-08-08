@@ -7,14 +7,14 @@
     android:orientation="vertical"
     android:background="@color/card"
     android:weightSum="4"
-    tools:context=".choose">
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="2.5"
-    android:contentDescription="@null"
-    android:src="@drawable/smes"
-    />
+    tools:context=".Activities.ChooseActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
+        android:contentDescription="@null"
+        android:src="@drawable/smerdapng"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/customer_full"
-           android:layout_weight="1"
+            android:layout_weight="1"
             android:id="@+id/customer"
             />
         <ImageView

@@ -1,5 +1,4 @@
 package com.example.fyp.Activities;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,21 +21,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-
 public class AddressDetail extends AppCompatActivity {
-    EditText edit_name,edit_phone,edit_address,edit_email;
-String total_Amount="",state="Normal";
-Button btn;
-DatabaseReference databaseReference;
+    EditText edit_name,edit_phone,edit_address,edit_email,edit_lastname;
+    String total_Amount="",state="Normal";
+    Button btn;
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_detail);
-        edit_name= findViewById(R.id.your_name);
-        edit_phone= findViewById(R.id.your_number);
-        edit_address= findViewById(R.id.your_email);
-        edit_email= findViewById(R.id.your_address);
-        btn= findViewById(R.id.btn);
+        edit_name=(EditText)findViewById(R.id.your_name);
+        edit_phone=(EditText)findViewById(R.id.your_number);
+        edit_address=(EditText)findViewById(R.id.your_address);
+        edit_email=(EditText)findViewById(R.id.your_email);
+        edit_lastname=(EditText)findViewById(R.id.last_name);
+        btn=(Button)findViewById(R.id.btn);
         databaseReference= FirebaseDatabase.getInstance().getReference("ConfirmOrder").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         total_Amount=getIntent().getStringExtra("Total_price");
         Toast.makeText(AddressDetail.this,"Total Price = $" +total_Amount,Toast.LENGTH_LONG).show();
@@ -44,17 +43,17 @@ DatabaseReference databaseReference;
             @Override
             public void onClick(View v) {
                 CheckValidation();
-                if (state.equals("Order Placed") || state.equals("Order Shipped")){
+               /* if (state.equals("Order Placed") || state.equals("Order Shipped")){
                     Toast.makeText(AddressDetail.this,"You can purchased new products after shipped the previous product",Toast.LENGTH_SHORT).show();
                 }
+                else {
+                    CheckOrderState();
+                }*/
             }
         });
 
     }
-    protected void onStart(){
-        super.onStart();
-        CheckOrderState();
-    }
+
     private void CheckOrderState() {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -62,7 +61,7 @@ DatabaseReference databaseReference;
                 if (dataSnapshot.exists()){
                     String shippingState=dataSnapshot.child("state").getValue().toString();
                     if (shippingState.equals("shipped")){
-                       state="Order Shipped";
+                        state="Order Shipped";
                     }
                     else if (shippingState.equals("not shipped")){
                         state="Order Placed";
@@ -72,7 +71,6 @@ DatabaseReference databaseReference;
                         Toast.makeText(AddressDetail.this,"Error",Toast.LENGTH_SHORT).show();
                     }
                 }
-
             }
 
             @Override
@@ -84,6 +82,7 @@ DatabaseReference databaseReference;
     }
     private void CheckValidation() {
         String name=edit_name.getText().toString();
+        String last_name=edit_lastname.getText().toString();
         String phone=edit_phone.getText().toString();
         String address=edit_address.getText().toString();
         String email=edit_email.getText().toString();
@@ -91,11 +90,15 @@ DatabaseReference databaseReference;
             edit_name.setError("Enter your name");
             edit_name.requestFocus();
         }
-       else if (TextUtils.isEmpty(phone)){
+        else if (TextUtils.isEmpty(last_name)){
+            edit_lastname.setError("Please enter your last or surname");
+            edit_lastname.requestFocus();
+        }
+        else if (TextUtils.isEmpty(phone)){
             edit_phone.setError("Enter your Phone Number");
             edit_phone.requestFocus();
         }
-       else if (TextUtils.isEmpty(address)){
+        else if (TextUtils.isEmpty(address)){
             edit_address.setError("Enter your Address");
             edit_address.requestFocus();
         }
@@ -111,29 +114,26 @@ DatabaseReference databaseReference;
     private void ConfirmOrder() {
         HashMap<String,Object> map=new HashMap<>();
         map.put("cname",edit_name.getText().toString());
+        map.put("lastName",edit_lastname.getText().toString());
         map.put("phoneNum",edit_phone.getText().toString());
         map.put("address",edit_address.getText().toString());
         map.put("email",edit_email.getText().toString());
-        map.put("state","not shipped");
+        map.put("state","shipped");
         databaseReference.updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    FirebaseDatabase.getInstance().getReference("GALLERY").child("DETAILPRODUCT").removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    FirebaseDatabase.getInstance().getReference("DetailProduct").removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                       if (task.isSuccessful()){
-                           Toast.makeText(AddressDetail.this,"Your final order has been processed",Toast.LENGTH_SHORT).show();
-                           Intent intent=new Intent(AddressDetail.this, CompanyProfile.class);
-                           intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                           startActivity(intent);
-                       }
+                            if (task.isSuccessful()){
+                                Intent intent=new Intent(AddressDetail.this,ShippedMsg.class);
+                                startActivity(intent);
+                            }
                         }
                     });
                 }
             }
         });
     }
-
-
 }
