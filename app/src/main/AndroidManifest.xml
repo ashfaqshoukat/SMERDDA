@@ -48,9 +48,6 @@
             android:name=".Activities.signin"
             android:theme="@style/SpashScreen" />
         <activity
-            android:name=".Activities.signup"
-            android:theme="@style/SpashScreen" />
-        <activity
             android:name=".Activities.Cus_main_signup"
             android:theme="@style/SpashScreen" />
         <activity
