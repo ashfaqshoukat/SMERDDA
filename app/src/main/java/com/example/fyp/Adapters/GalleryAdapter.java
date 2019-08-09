@@ -1,4 +1,4 @@
-package com.example.fyp;
+package com.example.fyp.Adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fyp.Activities.ShopActivity;
 import com.example.fyp.Models.GALLERY;
+import com.example.fyp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

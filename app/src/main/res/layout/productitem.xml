@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     >
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="180dp"
         android:layout_height="180dp"
         app:cardElevation="8dp"
         android:layout_marginBottom="15dp"
@@ -30,15 +30,6 @@
                 android:src="@drawable/image"
                 android:contentDescription="@null"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Product"
-                android:textColor="@color/darkgrey"
-                android:id="@+id/product_name"
-                />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -50,24 +41,33 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 >
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:src="@drawable/cart"
-                    android:contentDescription="@null"
-                    />
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:gravity="end"
+                    android:layout_marginTop="5dp"
+                    android:text="Product"
+                    android:textColor="@color/darkgrey"
+                    android:id="@+id/product_name"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="$200"
                     android:id="@+id/price"
                     android:textColor="@color/darkgrey"
-
+                    />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:contentDescription="@null"
+                    android:text="ADD TO CART"
+                    android:background="@drawable/cart_button"
+                    android:drawableStart="@drawable/cart"
                     />
             </LinearLayout>
         </LinearLayout>
