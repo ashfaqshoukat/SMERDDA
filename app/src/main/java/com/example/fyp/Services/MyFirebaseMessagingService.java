@@ -14,7 +14,6 @@ import androidx.core.app.NotificationCompat;
 import com.example.fyp.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
 public class MyFirebaseMessagingService extends FirebaseMessagingService  {
     private static final String TAG = "FCM Service";
     @Override
@@ -33,10 +32,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService  {
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(true);
-
         NotificationManager notificationManager =
                 (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
         notificationManager.notify(0, notificationBuilder.build());
     }
 }

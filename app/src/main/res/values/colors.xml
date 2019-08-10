@@ -15,6 +15,7 @@
     <color name="bar">#50ADA0</color>
     <color name="google">#4285F4</color>
     <color name="black">#000</color>
+    <color name="yellow">#ffff33</color>
     <color name="white">#fff</color>
     <color name="feedback_bg">#CB25282d</color>
 </resources>

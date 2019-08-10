@@ -269,8 +269,8 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
                 COMPANYINFO companyInfo=dataSnapshot.getValue(COMPANYINFO.class);
                 txtabout.setText(companyInfo.getAbout());
                 txtCompany.setText(companyInfo.getCompName());
-                txtemail.setText(companyInfo.getEmail());
-                txtphonenbr.setText(companyInfo.getPhonenbr());
+//                txtemail.setText(companyInfo.getEmail());
+//                txtphonenbr.setText(companyInfo.getPhonenbr());
                 if(!companyInfo.getProfileimage().equalsIgnoreCase("")){
 
                     Picasso.get().load(companyInfo.getProfileimage()).into(circularimage);}

@@ -63,11 +63,11 @@
                     />
                 <Button
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:contentDescription="@null"
+                    android:layout_height="wrap_content"
                     android:text="ADD TO CART"
                     android:background="@drawable/cart_button"
                     android:drawableStart="@drawable/cart"
+                    android:padding="10dp"
                     />
             </LinearLayout>
         </LinearLayout>
