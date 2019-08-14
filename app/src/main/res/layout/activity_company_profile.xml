@@ -94,7 +94,7 @@
                         android:drawableStart="@drawable/filled_message_filled_32px"
                         android:textSize="20sp"
                         android:textColor="@color/darkgrey"
-                        android:id="@+id/Email"
+                        android:id="@+id/email"
                         android:drawablePadding="30dp"
                         android:text="Email"
                         android:layout_gravity="start|center_vertical"

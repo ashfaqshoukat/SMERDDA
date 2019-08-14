@@ -78,10 +78,11 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
         setContentView(R.layout.activity_company_profile);
         txtabout = (TextView) findViewById(R.id.about);
         txtCompany = (TextView) findViewById(R.id.companyName);
+        txtphonenbr = (TextView) findViewById(R.id.call);
         imageView_add = (ImageView) findViewById(R.id.addPic);
         chooseImage=(ImageView)findViewById(R.id.choosePic);
         button2 = (Button) findViewById(R.id.newOrder);
-        txtEmail=(TextView)findViewById(R.id.Email);
+        txtEmail=findViewById(R.id.email);
         circularimage=(RoundedImageView)findViewById(R.id.circularimage);
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -269,8 +270,9 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
                 COMPANYINFO companyInfo=dataSnapshot.getValue(COMPANYINFO.class);
                 txtabout.setText(companyInfo.getAbout());
                 txtCompany.setText(companyInfo.getCompName());
-//                txtemail.setText(companyInfo.getEmail());
-//                txtphonenbr.setText(companyInfo.getPhonenbr());
+
+                txtEmail.setText(companyInfo.getEmail());
+                txtphonenbr.setText(companyInfo.getPhonenbr());
                 if(!companyInfo.getProfileimage().equalsIgnoreCase("")){
 
                     Picasso.get().load(companyInfo.getProfileimage()).into(circularimage);}

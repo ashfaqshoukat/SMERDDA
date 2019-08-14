@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
@@ -27,8 +36,11 @@ import com.anychart.enums.LegendLayout;
 import com.example.fyp.Models.COMPANYINFO;
 import com.example.fyp.Dialogs.FeedbackDialog;
 import com.example.fyp.Models.COMMENT;
+
+import com.example.fyp.Models.message;
 import com.example.fyp.R;
 import com.example.fyp.Models.RATING;
+import com.example.fyp.Services.MySingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,14 +49,21 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.stepstone.apprating.AppRatingDialog;
 import com.stepstone.apprating.listener.RatingDialogListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CompanyDetailActivity extends AppCompatActivity implements RatingDialogListener {
 
@@ -62,6 +81,18 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
     public static Context geInstance() {
         return instance;
     }
+
+
+    final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
+    final private String serverKey = "key=" + "AAAAIvjGbME:APA91bGguFNNBwx05QNrFGLBtVb11XHdWNHjFDm7W0jzN0w1HDRHvkLHKux8KC-VMs1jViTNK5wibrxvEtSm6TMsRtddlhzbxmn1323NYbczaQkgVpeVoe5Ao73RPEALR9ypJ5u2mwts";
+    final private String contentType = "application/json";
+    final String TAG = "NOTIFICATION TAG";
+
+    String NOTIFICATION_TITLE;
+    String NOTIFICATION_MESSAGE;
+    String TOPIC;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +162,7 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         String info = getIntent().getExtras().getString("comapnyinfo");
         companyInfo = new Gson().fromJson(info, COMPANYINFO.class);
         comapnayName.setText(companyInfo.getCompName());
-        comapanyEmail.setText(companyInfo.getEmail());
+//        comapanyEmail.setText(companyInfo.getEmail());
         getSupportActionBar().setTitle(companyInfo.getCompName());
         if(!companyInfo.getProfileimage().equalsIgnoreCase("")){
             Picasso.get().load(companyInfo.getProfileimage()).placeholder(getDrawable(R.drawable.smerdapng)).into(profileImage);
@@ -259,9 +290,28 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         });
 
 
+        TOPIC = "/topics/userABC"; //topic has to match what the receiver subscribed to
+        NOTIFICATION_TITLE = companyInfo.getCompName();
+        NOTIFICATION_MESSAGE =s;
+
+        JSONObject notification = new JSONObject();
+        JSONObject notifcationBody = new JSONObject();
+        try {
+            notifcationBody.put("title", NOTIFICATION_TITLE);
+            notifcationBody.put("message", NOTIFICATION_MESSAGE);
+
+            notification.put("to", TOPIC);
+            notification.put("data", notifcationBody);
+        } catch (JSONException e) {
+            Log.e(TAG, "onCreate: " + e.getMessage() );
+        }
+        sendNotification(notification);
+
+
 
 
     }
+
 
 
     double rating = 0;
@@ -301,4 +351,32 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
     }
 
 
+    private void sendNotification(JSONObject notification) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notification,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "onResponse: " + response.toString());
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(CompanyDetailActivity.this, "Request error", Toast.LENGTH_LONG).show();
+                        Log.i(TAG, "onErrorResponse: Didn't work");
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", serverKey);
+                params.put("Content-Type", contentType);
+                return params;
+            }
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+    }
 }
+
+

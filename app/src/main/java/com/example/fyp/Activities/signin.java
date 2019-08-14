@@ -1,9 +1,11 @@
 package com.example.fyp.Activities;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -106,6 +108,7 @@ public class signin extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             MatchMulitCompnayName();
+                            updateFirebaseToken();
 
 
                         }
@@ -226,5 +229,12 @@ public class signin extends AppCompatActivity {
 
     }
 
+    private void updateFirebaseToken(){
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String token=preferences.getString("token","");
+        if(!token.equals(""))
+        FirebaseDatabase.getInstance().getReference().child("CompanyInfo").child(FirebaseAuth.getInstance().getUid()).
+                child("FCMToken").setValue(token);
+    }
 
 }

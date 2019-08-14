@@ -42,22 +42,34 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'com.google.firebase:firebase-database:18.0.1'
-    implementation 'com.google.firebase:firebase-auth:18.1.0'
-    implementation 'com.google.firebase:firebase-storage:18.1.1'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
-    implementation 'com.firebaseui:firebase-ui-database:5.0.0'
-
+    implementation 'com.android.volley:volley:1.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
     implementation 'io.realm:android-adapters:3.1.0'
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
-    implementation 'com.google.firebase:firebase-messaging:19.0.1'
-    //GSON dependency
+    /*implementation 'com.firebaseui:firebase-ui-database:5.0.0'
+    implementation 'com.google.firebase:firebase-database:10.2.1'
+    implementation 'com.google.firebase:firebase-auth:10.2.1'
+    implementation 'com.google.firebase:firebase-storage:10.2.1'
+    implementation 'com.google.android.gms:play-services:10.2.1'
+    implementation 'com.google.firebase:firebase-messaging:10.2.1'*/
+
+    implementation 'com.firebaseui:firebase-ui-database:5.0.0'
+
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+//Firebase Authentication
+    implementation 'com.google.firebase:firebase-auth:17.0.0'
+    implementation 'com.google.firebase:firebase-storage:17.0.0'
+// Firestore Firestore
+    implementation 'com.google.firebase:firebase-firestore:17.0.4'
+    implementation 'com.google.firebase:firebase-database:17.0.0'
+//Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
+//GSON dependency
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.stepstone.apprating:app-rating:2.3.1'
     implementation 'com.muddzdev:styleabletoast:2.2.2'
-    implementation 'com.google.firebase:firebase-messaging:19.0.1'
 
 
 }

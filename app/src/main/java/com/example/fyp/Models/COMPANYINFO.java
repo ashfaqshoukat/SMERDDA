@@ -1,7 +1,7 @@
 package com.example.fyp.Models;
 
 public class COMPANYINFO {
-    private String compName, email, password,companyId,profileimage,phonenbr,about;
+    private String FCMToken="",compName, email, password,companyId,profileimage,phonenbr,about;
 
     public COMPANYINFO() {
     }
@@ -10,6 +10,14 @@ public class COMPANYINFO {
         this.compName = compName;
         this.email = email;
         this.password = password;
+    }
+
+    public String getFCMToken() {
+        return FCMToken;
+    }
+
+    public void setFCMToken(String FCMToken) {
+        this.FCMToken = FCMToken;
     }
 
     public String getCompName() {
