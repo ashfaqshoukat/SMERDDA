@@ -28,7 +28,7 @@ public class CompanyProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_product);
-        String id=getIntent().getExtras().getString("id");
+        String id=getIntent().getStringExtra("id");
         String name=getIntent().getExtras().getString("name");
         recyclerView=findViewById(R.id.recyclerView);
         toolbar=findViewById(R.id.toolbar);
@@ -37,7 +37,6 @@ public class CompanyProductActivity extends AppCompatActivity {
 
         getAllProducts(id);
     }
-
     private void getAllProducts(String id) {
         FirebaseDatabase.getInstance().getReference().child("Gallery").child(id).addValueEventListener(new ValueEventListener() {
             @Override

@@ -8,6 +8,7 @@
     <color name="card">#ffffff</color>
     <color name="lightgrey">#F9FAFA</color>
     <color name="grey">#D0DBDA</color>
+    <color name="greylight">#F3F8F8</color>
     <color name="green">#02C7AD</color>
     <color name="darkgrey">#8AA09C</color>
     <color name="cyan">#8EDDD3</color>
@@ -17,5 +18,6 @@
     <color name="black">#000</color>
     <color name="yellow">#ffff33</color>
     <color name="white">#fff</color>
+    <color name="cardbg">#FBE5BA</color>
     <color name="feedback_bg">#CB25282d</color>
 </resources>

@@ -23,6 +23,7 @@ import java.util.List;
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.myHolder> {
     Context context;
     ArrayList<COMPANYINFO> list;
+    COMPANYINFO companydata;
     public CompanyAdapter(Context context, List<COMPANYINFO> list) {
         this.context = context;
         this.list = (ArrayList<COMPANYINFO>) list;
@@ -41,14 +42,16 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.myHolder
         if(!company.getProfileimage().equalsIgnoreCase("")){
             Picasso.get().load(company.getProfileimage()).into(myHolder.imageView);
         }
-
         myHolder.itemLyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CompanyDetailActivity.class);
+                //Intent intent1 = new Intent(context, CompanyDetailActivity.class);
                 Gson gson = new Gson();
                 String data = gson.toJson(list.get(i));
                 intent.putExtra("comapnyinfo", data);
+                //intent.putExtra("id",companydata.getCompanyId());
+
                 context.startActivity(intent);
             }
         });

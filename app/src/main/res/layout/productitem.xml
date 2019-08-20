@@ -8,44 +8,47 @@
     >
     <androidx.cardview.widget.CardView
         android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_height="190dp"
         app:cardElevation="8dp"
-        android:layout_marginBottom="15dp"
-        app:cardCornerRadius="6dp"
+        app:cardCornerRadius="15dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             >
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="85dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"
                 android:id="@+id/image_product"
                 android:src="@drawable/image"
                 android:contentDescription="@null"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginBottom="10dp"
                 android:background="@color/darkgrey"
                 android:layout_gravity="center"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="@color/cardbg"
                 >
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:layout_marginTop="5dp"
                     android:text="Product"
                     android:textColor="@color/darkgrey"
@@ -55,20 +58,27 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="$200"
                     android:id="@+id/price"
                     android:textColor="@color/darkgrey"
+                    android:layout_marginBottom="10dp"
                     />
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+               <!-- <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
                     android:text="ADD TO CART"
                     android:background="@drawable/cart_button"
-                    android:drawableStart="@drawable/cart"
-                    android:padding="10dp"
-                    />
+                    android:drawableStart="@drawable/shopping_cart_25px"
+                    android:drawablePadding="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    />-->
             </LinearLayout>
         </LinearLayout>
 
