@@ -118,7 +118,10 @@ public class UploadPic extends AppCompatActivity {
                     Uri downloaduri=uriTask.getResult();
                     GALLERY gallery = new GALLERY(edit_name.getText().toString().trim(), edit_price.getText().toString().trim(),downloaduri.toString(),edit_description.getText().toString().trim());
                     String uploadId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    databaseReference.child(uploadId).child(SystemClock.currentThreadTimeMillis()+"").setValue(gallery);
+                    gallery.setCompany_id(uploadId);
+                    long timeStamp = System.currentTimeMillis();
+                    gallery.setProduct_id(timeStamp+"");
+                    databaseReference.child(uploadId).child(timeStamp+"").setValue(gallery);
                     Toast.makeText(UploadPic.this, "Image Upload successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(UploadPic.this, CompanyProfile.class));
                     finish();

@@ -27,7 +27,9 @@ import com.example.fyp.Activities.signin;
 import com.example.fyp.Adapters.GalleryAdapter;
 import com.example.fyp.Database.HelperProfile;
 
+import com.example.fyp.Extras.PreferanceFile;
 import com.example.fyp.Models.COMPANYINFO;
+import com.example.fyp.Models.CUSTOMERINFO;
 import com.example.fyp.Models.GALLERY;
 import com.example.fyp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -242,6 +244,8 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 COMPANYINFO companyInfo=dataSnapshot.getValue(COMPANYINFO.class);
+                PreferanceFile.getInstance(getApplicationContext()).setCompanyinfo(companyInfo);
+                PreferanceFile.getInstance(getApplicationContext()).setIsCompany(true);
                 txtabout.setText(companyInfo.getAbout());
                 txtCompany.setText(companyInfo.getCompName());
 
@@ -302,4 +306,9 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
         }
         return sCompnayName;
     }
+
+
+
+
+
 }

@@ -1,26 +1,60 @@
 package com.example.fyp.Extras;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
-public class PreferanceFile
-{
-    private static PreferanceFile preferanceFile=null;
-    private static boolean isCompany;
+import com.example.fyp.Models.COMPANYINFO;
+import com.example.fyp.Models.CUSTOMERINFO;
+import com.google.gson.Gson;
 
-    public static PreferanceFile getInstance(){
-        if(preferanceFile==null){
-            preferanceFile=new PreferanceFile();
+public class PreferanceFile {
+    private static PreferanceFile preferanceFile = null;
+    private static SharedPreferences preferences = null;
+    private static SharedPreferences.Editor editor = null;
+    private boolean isCompany;
+
+    public static PreferanceFile getInstance(Context context) {
+        if (preferanceFile == null || editor == null || preferences == null) {
+            preferences = context.getSharedPreferences("user", 0);
+            editor = preferences.edit();
+            preferanceFile = new PreferanceFile();
 
         }
         return preferanceFile;
     }
 
-    public   void setIsCompany(boolean status){
-        isCompany=status;
+    public void setIsCompany(boolean status) {
+        isCompany = status;
     }
 
-    public  boolean isIsCompany(){
+    public boolean isIsCompany() {
         return isCompany;
+    }
+
+    public void setCustomerinfo(CUSTOMERINFO customerinfo) {
+        editor.putString("user", new Gson().toJson(customerinfo));
+        save();
+    }
+
+    public CUSTOMERINFO getCustomer() {
+        return new Gson().fromJson(preferences.getString("user", null), CUSTOMERINFO.class);
+    }
+
+
+    public void setCompanyinfo(COMPANYINFO companyinfo) {
+        editor.putString("user", new Gson().toJson(companyinfo));
+        save();
+    }
+
+    public COMPANYINFO getCompany() {
+        return new Gson().fromJson(preferences.getString("user", null), COMPANYINFO.class);
+    }
+    public void deletePreferance() {
+        preferences.edit().clear();
+    }
+
+    private void save() {
+        editor.apply();
     }
 
 

@@ -1,18 +1,27 @@
 package com.example.fyp.Models;
 
 public class CUSTOMERINFO {
-    public String username, email, phone, address, password, profileimage;
+    private String FCMToken="",username, email, phone, address, password, profileimage;
 
     public CUSTOMERINFO() {
     }
 
-    public CUSTOMERINFO(String username, String email, String phone, String address, String password) {
+    public CUSTOMERINFO(String username, String email, String phone, String address, String password,String FCMToken) {
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.password = password;
         this.profileimage = "";
+        this.FCMToken=FCMToken;
+    }
+
+    public String getFCMToken() {
+        return FCMToken;
+    }
+
+    public void setFCMToken(String FCMToken) {
+        this.FCMToken = FCMToken;
     }
 
     public String getUsername() {

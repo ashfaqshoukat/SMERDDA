@@ -16,6 +16,11 @@
                 android:title="About"
                 app:showAsAction="never"
                 />
+            <item
+                android:id="@+id/customerId"
+                android:title="Order Info"
+                app:showAsAction="never"
+                />
         </menu>
 
 </item>

@@ -27,7 +27,7 @@ ImageView cus,Smes;
         cus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PreferanceFile.getInstance().setIsCompany(false);
+                PreferanceFile.getInstance(getApplicationContext()).setIsCompany(false);
                 Intent intent=new Intent(ChooseActivity.this, Cus_main_signup.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slidein_right,R.anim.slideout_left);
@@ -36,7 +36,7 @@ ImageView cus,Smes;
         Smes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PreferanceFile.getInstance().setIsCompany(true);
+                PreferanceFile.getInstance(getApplicationContext()).setIsCompany(true);
                 Intent intent=new Intent(ChooseActivity.this, SignupHome.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slidein_right,R.anim.slideout_left);

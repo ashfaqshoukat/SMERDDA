@@ -17,6 +17,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fyp.Extras.PreferanceFile;
+import com.example.fyp.Models.CUSTOMERINFO;
 import com.example.fyp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -225,6 +227,9 @@ public class Customer_profile extends AppCompatActivity implements PopupMenu.OnM
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    CUSTOMERINFO customerinfo=dataSnapshot.getValue(CUSTOMERINFO.class);
+                    PreferanceFile.getInstance(getApplicationContext()).setCustomerinfo(customerinfo);
+                    PreferanceFile.getInstance(getApplicationContext()).setIsCompany(false);
                     username = (String) dataSnapshot.child("username").getValue();
                     address = (String) dataSnapshot.child("address").getValue();
                     phone = (String) dataSnapshot.child("phone").getValue();

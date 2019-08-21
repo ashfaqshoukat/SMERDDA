@@ -3,7 +3,10 @@ package com.example.fyp.Activities;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -18,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Customer_signin extends AppCompatActivity {
 EditText et_cus_email,et_cus_pass;
@@ -76,6 +80,7 @@ String email,password;
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    updateFirebaseToken();
                     checkEmailVerification();
                 }
                 else {
@@ -99,4 +104,11 @@ String email,password;
         }
     }
 
+    private void updateFirebaseToken(){
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String token=preferences.getString("token","");
+        if(!token.equals(""))
+            FirebaseDatabase.getInstance().getReference().child("CustomerInfo").child(FirebaseAuth.getInstance().getUid()).
+                    child("FCMToken").setValue(token);
+    }
 }

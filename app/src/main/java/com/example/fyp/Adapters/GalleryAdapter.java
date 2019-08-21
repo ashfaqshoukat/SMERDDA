@@ -57,13 +57,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageVie
        /* holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext, ShopActivity.class);
+                /*Intent intent=new Intent(mContext, ShopActivity.class);
                 intent.putExtra("product_title",galleryCur.getProduct_title());
                 intent.putExtra("product_price",galleryCur.getProduct_price());
                 intent.putExtra("product_description",galleryCur.getProduct_description());
                 intent.putExtra("product_image",image);
 
-                mContext.startActivity(intent);
+                mContext.startActivity(intent);*/
             }
         });*/
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

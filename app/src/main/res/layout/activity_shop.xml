@@ -16,16 +16,16 @@
         android:orientation="vertical"
         android:background="@color/white"
         >
+
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/getImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:contentDescription="@null"
             android:src="@drawable/image"
-            android:id="@+id/getImage"
-            android:layout_gravity="center"
-            android:transitionName="imageTransition"
-            android:layout_marginTop="20dp"
-            />
+            android:transitionName="imageTransition" />
 
     </LinearLayout>
 
@@ -117,21 +117,20 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/railway"
                         />
+
                     <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                        android:id="@+id/txt_count"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:textSize="12sp"
-                        app:textColor="@color/card"
-                        android:id="@+id/txt_count"
-                        app:initialNumber="1"
-                        app:finalNumber="100"
                         android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
                         app:backGroundColor="@color/cyan"
-                        >
-                    </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+                        app:finalNumber="100"
+                        app:initialNumber="1"
+                        app:textColor="@color/card"
+                        app:textSize="12sp"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
                 </LinearLayout>
 
                 <LinearLayout

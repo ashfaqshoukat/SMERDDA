@@ -1,5 +1,6 @@
 package com.example.fyp.Activities;
 
+import android.content.Intent;
 import android.os.Build;
 
 import com.example.fyp.Adapters.Adapterviewpage;
@@ -54,7 +55,12 @@ public class Homepage extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case R.id.customerId:
+                startActivity(new Intent(Homepage.this,CustomerOrder.class));
+                break;
+        }
+        return false;
     }
     public void onBackPressed(){
         super.onBackPressed();

@@ -14,32 +14,41 @@ import android.widget.TextView;
 
 import com.example.fyp.Models.DETAILPRODUCT;
 import com.example.fyp.Models.GALLERY;
+import com.example.fyp.Models.ORDERINFO;
 import com.example.fyp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 public class ConfirmActivity extends AppCompatActivity {
     TextView txt_name,txt_price,txt_quan,txt_total;
     Button button_confirm;
     DatabaseReference databaseReference,databaseReference1;
     int overTotalPrice=0;
+    ORDERINFO orderinfo;
+    String order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
+        order=getIntent().getStringExtra("orderinfo");
+        Gson gson=new Gson();
+        orderinfo=gson.fromJson(order,ORDERINFO.class);
         txt_name= findViewById(R.id.name);
         txt_price= findViewById(R.id.pricepro);
         txt_quan= findViewById(R.id.quantity);
         button_confirm= findViewById(R.id.confirm);
         txt_total= findViewById(R.id.totalPrice);
-        databaseReference= FirebaseDatabase.getInstance().getReference("GALLERY");
-        databaseReference1=FirebaseDatabase.getInstance().getReference("GALLERY").child("DETAILPRODUCT");
-        GetDetails();
-        GetAllDetails();
+        txt_name.setText(orderinfo.getProductName());
+        txt_price.setText(orderinfo.getProductPrice()+"");
+        txt_total.setText(orderinfo.getProductPrice()*orderinfo.getProductQty()+"");
+        txt_quan.setText(orderinfo.getProductQty()+"");
+//        GetDetails();
+//        GetAllDetails();
         DisplayMetrics metrics=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int height=metrics.heightPixels;
@@ -54,10 +63,12 @@ public class ConfirmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 txt_total.setText(String.valueOf(overTotalPrice));
-                TotalPrice();
+//                TotalPrice();
                 Intent intent=new Intent(ConfirmActivity.this, AddressDetail.class);
                 intent.putExtra("Total_price",String.valueOf(overTotalPrice));
+                intent.putExtra("orderinfo",order);
                 startActivity(intent);
+                finish();
             }
         });
     }

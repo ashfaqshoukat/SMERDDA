@@ -283,24 +283,9 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         });
 
 
-        TOPIC = "/topics/userABC"; //topic has to match what the receiver subscribed to
-        NOTIFICATION_TITLE = companyInfo.getCompName();
-        NOTIFICATION_MESSAGE =s;
-
-        JSONObject notification = new JSONObject();
-        JSONObject notifcationBody = new JSONObject();
-        try {
-            notifcationBody.put("title", NOTIFICATION_TITLE);
-            notifcationBody.put("message", NOTIFICATION_MESSAGE);
-
-            notification.put("to", TOPIC);
-            notification.put("data", notifcationBody);
-        } catch (JSONException e) {
-            Log.e(TAG, "onCreate: " + e.getMessage() );
-        }
-        sendNotification(notification);
 
 
+sendNotification(s);
 
 
     }
@@ -368,6 +353,26 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
             }
         };
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+    }
+
+    private void sendNotification(String s){
+        TOPIC = "/topics/userABC"; //topic has to match what the receiver subscribed to
+        NOTIFICATION_TITLE = companyInfo.getCompName();
+        NOTIFICATION_MESSAGE =s;
+
+        JSONObject notification = new JSONObject();
+        JSONObject notifcationBody = new JSONObject();
+        try {
+            notifcationBody.put("title", NOTIFICATION_TITLE);
+            notifcationBody.put("message", NOTIFICATION_MESSAGE);
+            notifcationBody.put("id",companyInfo.getCompanyId());
+
+            notification.put("to", TOPIC);
+            notification.put("data", notifcationBody);
+        } catch (JSONException e) {
+            Log.e(TAG, "onCreate: " + e.getMessage() );
+        }
+        sendNotification(notification);
     }
 }
 

@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activities.CustomerOrder"></activity>
+        <activity android:name=".Activities.OrderDetail" />
+
         <service
             android:name=".Services.MyFirebaseMessagingService"
             android:exported="false">
@@ -22,11 +25,11 @@
         </service>
         <service android:name=".Services.FirebaseIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".Activities.NewOrderProduct"></activity>
+        <activity android:name=".Activities.NewOrderProduct" />
         <activity android:name=".Activities.NewOrder" />
         <activity android:name=".Activities.ShippedMsg" />
         <activity android:name=".Activities.CompanyProductActivity" />

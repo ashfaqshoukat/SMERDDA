@@ -117,7 +117,7 @@ public class Customer_signup extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                final CUSTOMERINFO customerInfo = new CUSTOMERINFO(userName, email, phoneNo, address, password);
+                                final CUSTOMERINFO customerInfo = new CUSTOMERINFO(userName, email, phoneNo, address, password,"");
                                 FirebaseDatabase.getInstance().getReference("CustomerInfo").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(customerInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override

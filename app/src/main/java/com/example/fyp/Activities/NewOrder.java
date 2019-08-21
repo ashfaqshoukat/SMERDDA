@@ -2,6 +2,7 @@ package com.example.fyp.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,65 +16,59 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.fyp.Models.NewOrderModel;
+import com.example.fyp.Models.ORDERINFO;
 import com.example.fyp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+
 public class NewOrder extends AppCompatActivity {
     RecyclerView recyclerView;
+    FirebaseRecyclerAdapter<ORDERINFO,OrderViewHolder> adapter = null;
     DatabaseReference databaseReference,databaseReference2;
+    TextView orderdetail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order);
         recyclerView=(RecyclerView)findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(NewOrder.this));
-        databaseReference= FirebaseDatabase.getInstance().getReference("ConfirmOrder");
+        databaseReference= FirebaseDatabase.getInstance().getReference("Order").child(FirebaseAuth.getInstance().getUid());
 
     }
     protected void onStart(){
         super.onStart();
-        FirebaseRecyclerOptions<NewOrderModel> options=new FirebaseRecyclerOptions.Builder<NewOrderModel>().setQuery(databaseReference,NewOrderModel.class).build();
-        FirebaseRecyclerAdapter<NewOrderModel,OrderViewHolder> adapter=new FirebaseRecyclerAdapter<NewOrderModel, OrderViewHolder>(options) {
+        FirebaseRecyclerOptions<ORDERINFO> options=new FirebaseRecyclerOptions.Builder<ORDERINFO>().setQuery(databaseReference,ORDERINFO.class).build();
+
+        adapter=new FirebaseRecyclerAdapter<ORDERINFO, OrderViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull OrderViewHolder orderViewHolder, int i, @NonNull NewOrderModel newOrderModel) {
-                orderViewHolder.name.setText(newOrderModel.getCname());
-                orderViewHolder.emailuser.setText(newOrderModel.getEmail());
-                orderViewHolder.phone.setText(newOrderModel.getPhoneNum());
-                orderViewHolder.address.setText(newOrderModel.getAddress());
-                orderViewHolder.txt.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(NewOrder.this,NewOrderProduct.class);
-                        startActivity(intent);
-                    }
-                });
-                orderViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        CharSequence options[]=new CharSequence[]{
-                                "Yes",
-                                "No"
-                        };
-                        AlertDialog.Builder builder=new AlertDialog.Builder(NewOrder.this);
-                        builder.setTitle("Have you shipped this Product ?");
-                        builder.setItems(options, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int i) {
-                                if (i==0){
-                                    //String uid=databaseReference.getKey();
-                                    RemoveOrder();
-                                }
-                                else {
-                                    finish();
-                                }
-                            }
-                        });
-                        builder.show();
-                    }
-                });
+            protected void onBindViewHolder(@NonNull OrderViewHolder orderViewHolder, int i, @NonNull ORDERINFO newOrderModel) {
+                if(newOrderModel.getStatus()!=3) {
+                    orderViewHolder.name.setText(newOrderModel.getUserFName());
+                    orderViewHolder.emailuser.setText(newOrderModel.getUserEmail());
+                    orderViewHolder.phone.setText(newOrderModel.getUserPhoneNbr());
+                    orderViewHolder.address.setText(newOrderModel.getUserAddress());
+                    orderViewHolder.txt.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+//                        Intent intent=new Intent(NewOrder.this,NewOrderProduct.class);
+//                        startActivity(intent);
+                        }
+                    });
+                    orderViewHolder.ordeDetail.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(NewOrder.this, OrderDetail.class);
+                            intent.putExtra("orderinfo", new Gson().toJson(newOrderModel));
+                            startActivity(intent);
+
+                        }
+                    });
+                }
+
             }
 
             @NonNull
@@ -94,7 +89,8 @@ public class NewOrder extends AppCompatActivity {
 }
 class OrderViewHolder extends RecyclerView.ViewHolder{
     TextView name,emailuser,phone,address;
-    TextView txt;
+    TextView txt,ordeDetail;
+    CardView cardView;
     public OrderViewHolder(@NonNull View itemView) {
         super(itemView);
         name=(TextView) itemView.findViewById(R.id.name_user);
@@ -102,5 +98,7 @@ class OrderViewHolder extends RecyclerView.ViewHolder{
         phone=(TextView) itemView.findViewById(R.id.phoneNum);
         address=(TextView) itemView.findViewById(R.id.address_order);
         txt=(TextView) itemView.findViewById(R.id.btn_new);
+        ordeDetail=itemView.findViewById(R.id.orderdetail);
+        cardView=itemView.findViewById(R.id.cardview);
     }
 }
