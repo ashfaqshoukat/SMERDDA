@@ -65,7 +65,7 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
     GalleryAdapter mAdapter;
     ArrayList<GALLERY> mGallery;
     TextView txtabout,txtCompany,txtEmail,txtemail,txtphonenbr ;
-    Button button2;
+    TextView button2;
     String Name;
     public static final int PICK_IMAGE_Gallery = 1;
     RoundedImageView circularimage;
@@ -78,10 +78,9 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
         setContentView(R.layout.activity_company_profile);
         txtabout = (TextView) findViewById(R.id.about);
         txtCompany = (TextView) findViewById(R.id.companyName);
-        txtphonenbr = (TextView) findViewById(R.id.call);
         imageView_add = (ImageView) findViewById(R.id.addPic);
         chooseImage=(ImageView)findViewById(R.id.choosePic);
-        button2 = (Button) findViewById(R.id.newOrder);
+        button2 = (TextView) findViewById(R.id.newOrder);
         txtEmail=findViewById(R.id.email);
         circularimage=(RoundedImageView)findViewById(R.id.circularimage);
         firebaseAuth = FirebaseAuth.getInstance();
