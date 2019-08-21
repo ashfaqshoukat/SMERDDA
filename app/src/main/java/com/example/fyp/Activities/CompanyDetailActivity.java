@@ -1,10 +1,5 @@
 package com.example.fyp.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,13 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+
 import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
@@ -33,13 +30,11 @@ import com.anychart.chart.common.listener.ListenersInterface;
 import com.anychart.charts.Pie;
 import com.anychart.enums.Align;
 import com.anychart.enums.LegendLayout;
-import com.example.fyp.Models.COMPANYINFO;
 import com.example.fyp.Dialogs.FeedbackDialog;
 import com.example.fyp.Models.COMMENT;
-
-import com.example.fyp.Models.message;
-import com.example.fyp.R;
+import com.example.fyp.Models.COMPANYINFO;
 import com.example.fyp.Models.RATING;
+import com.example.fyp.R;
 import com.example.fyp.Services.MySingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -49,8 +44,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.stepstone.apprating.AppRatingDialog;
@@ -357,7 +350,6 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i(TAG, "onResponse: " + response.toString());
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -367,7 +359,7 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
                         Log.i(TAG, "onErrorResponse: Didn't work");
                     }
                 }){
-            @Override
+        @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization", serverKey);
