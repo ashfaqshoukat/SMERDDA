@@ -54,7 +54,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageVie
         Picasso.get().load(image).into(holder.prod_img);
         int currentposition=position;
         GALLERY info=mGallery.get(currentposition);
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
+       holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*Intent intent=new Intent(mContext, ShopActivity.class);
@@ -65,7 +65,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageVie
 
                 mContext.startActivity(intent);*/
             }
-        });*/
+        });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

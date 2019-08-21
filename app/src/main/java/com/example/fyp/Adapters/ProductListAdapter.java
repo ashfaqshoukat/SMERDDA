@@ -54,7 +54,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                 intent.putExtra("product_price",galleryCur.getProduct_price());
                 intent.putExtra("product_description",galleryCur.getProduct_description());
                 intent.putExtra("product_image",image);
-
+                intent.putExtra("product_id",galleryCur.getProduct_id());
+                intent.putExtra("company_id",galleryCur.getCompany_id());
                 mContext.startActivity(intent);
             }
         });
