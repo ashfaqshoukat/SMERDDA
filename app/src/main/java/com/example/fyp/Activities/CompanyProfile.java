@@ -64,14 +64,12 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
     RecyclerView mRecyclerView;
     GalleryAdapter mAdapter;
     ArrayList<GALLERY> mGallery;
-    TextView txtabout,txtCompany,txtEmail,txtemail,txtphonenbr ;
+    TextView txtabout,txtCompany,txtEmail,txtemail,txtphonenbr;
     TextView button2;
     String Name;
     public static final int PICK_IMAGE_Gallery = 1;
     RoundedImageView circularimage;
-
     HelperProfile objHelperProfile ;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,9 +82,7 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
         txtEmail=findViewById(R.id.email);
         circularimage=(RoundedImageView)findViewById(R.id.circularimage);
         firebaseAuth = FirebaseAuth.getInstance();
-
         objHelperProfile = new HelperProfile(CompanyProfile.this);
-
         databaseReference = FirebaseDatabase.getInstance().getReference("CompanyInfo").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         //databaseReference2=FirebaseDatabase.getInstance().getReference("CustomerCompanyProfile").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         storageReference= FirebaseStorage.getInstance().getReference("ImagesCompany");
@@ -118,27 +114,6 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
     }
 
 
-    private String GetCompanyName()
-    {
-        DatabaseReference ref = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child("");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot zoneSnapshot : snapshot.getChildren()) {
-                    Name = zoneSnapshot.getValue().toString();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        return Name;
-    }
     private void MatchCompnayName()
     {
         DatabaseReference ref1= FirebaseDatabase.getInstance().getReference();
@@ -213,7 +188,7 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
         }
     }
     private void uploadImages(Uri filePath) {
-        chooseImage.setVisibility(View.INVISIBLE);
+        chooseImage.setVisibility(View.VISIBLE);
         circularimage.setImageURI(filePath);
 
         if (filePath != null) {

@@ -65,6 +65,8 @@
                 android:text="Sport Hd Company"
                 android:textColor="@color/black"
                 android:textStyle="normal"
+                android:fontFamily="@font/latobold"
+                android:textSize="20sp"
                 />
             <TextView
                 android:id="@+id/comapnyaddress"
@@ -75,6 +77,8 @@
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/black"
                 android:textStyle="normal"
+                android:fontFamily="@font/latolight"
+                android:textSize="17sp"
                 />
         </LinearLayout>
 <LinearLayout
@@ -88,12 +92,14 @@
     <TextView
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="18sp"
+        android:text="Example"
+        android:textSize="17sp"
         android:textColor="@android:color/black"
         android:id="@+id/aboutCompany"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
+        android:fontFamily="@font/latolight"
+
         />
 </LinearLayout>
             <View
@@ -157,7 +163,8 @@
             android:text="Give Feedback"
             android:textColor="@color/feedback_bg"
             android:layout_marginStart="10dp"
-
+android:fontFamily="@font/crimsonbold"
+            android:textSize="18sp"
             />
         <TextView
             android:id="@+id/ratecompany"
@@ -172,6 +179,8 @@
             android:textColor="@color/feedback_bg"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/crimsonbold"
+            android:textSize="18sp"
             />
     </LinearLayout>
     <LinearLayout
@@ -198,8 +207,8 @@
         android:layout_marginStart="20dp"
         android:text="Company  Chart "
         android:textColor="@android:color/black"
-        android:textStyle="bold" />
-
+        android:fontFamily="@font/montserratbold"
+        android:textSize="18sp"/>
     <com.anychart.AnyChartView
         android:id="@+id/picchart"
         android:layout_width="match_parent"

@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/card"
-    android:weightSum="4"
+    android:weightSum="3.5"
     tools:context=".Activities.ChooseActivity">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5"
+        android:layout_weight="2"
         android:contentDescription="@null"
         android:src="@drawable/smerdapng"
         />
@@ -24,12 +24,13 @@
         android:layout_gravity="center"
         android:textSize="20sp"
         android:lineSpacingMultiplier="1.2"
-        android:fontFamily="serif"
+        android:fontFamily="@font/latoblack"
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
+        android:gravity="center"
         >
         <ImageView
             android:layout_width="0dp"
@@ -53,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
+        android:gravity="center"
         >
         <TextView
             android:layout_width="0dp"
@@ -63,7 +65,7 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_marginStart="20dp"
-            android:fontFamily="serif"
+            android:fontFamily="@font/montserratbold"
             />
         <TextView
             android:layout_width="0dp"
@@ -74,7 +76,7 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_marginEnd="-50dp"
-            android:fontFamily="serif"
+            android:fontFamily="@font/montserratbold"
             />
     </LinearLayout>
     <LinearLayout
@@ -90,7 +92,7 @@
             android:textSize="15sp"
             android:layout_weight="1"
             android:layout_gravity="center|top"
-            android:fontFamily="serif"
+            android:fontFamily="@font/latoitalic"
             android:paddingEnd="10dp"
             android:paddingStart="20dp"
             />
@@ -102,7 +104,7 @@
             android:textSize="15sp"
             android:layout_gravity="center|top"
             android:layout_weight="1"
-            android:fontFamily="serif"
+            android:fontFamily="@font/latoitalic"
             android:paddingEnd="20dp"
             />
     </LinearLayout>
