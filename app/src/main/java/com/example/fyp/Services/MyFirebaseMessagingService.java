@@ -36,7 +36,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService  {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.i("remote message",remoteMessage.getData().toString());
-        if(remoteMessage.getData().get("id").equals(FirebaseAuth.getInstance().getUid())){
+        String my_Id=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String id=remoteMessage.getData().get("id");
+        Log.i("remote2",my_Id+"=="+id);
+        if(id.equals(my_Id)){
             final Intent intent = new Intent(this, Homepage.class);
             NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
             int notificationID = new Random().nextInt(3000);
