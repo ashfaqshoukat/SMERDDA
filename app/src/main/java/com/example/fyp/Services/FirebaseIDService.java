@@ -9,7 +9,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
 import static io.realm.internal.SyncObjectServerFacade.getApplicationContext;
-public class FirebaseIDService extends FirebaseMessagingService {
+public class FirebaseIDService extends FirebaseMessagingService   {
         private static final String TAG = "FirebaseIDService";
     private static final String SUBSCRIBE_TO = "userABC";
     public void onTokenRefresh() {

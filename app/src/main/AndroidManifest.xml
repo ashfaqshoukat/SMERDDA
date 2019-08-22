@@ -35,6 +35,7 @@
         <activity android:name=".Activities.CompanyProductActivity" />
         <activity android:name=".Activities.CompanyDetailActivity" />
         <activity android:name=".Activities.AddressDetail" />
+        <activity android:name=".Activities.signup" />
         <activity
             android:name=".Activities.ConfirmActivity"
             android:theme="@style/SpashScreen.Popup" />

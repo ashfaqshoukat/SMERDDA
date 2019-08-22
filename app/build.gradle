@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.0.0'
     implementation 'com.google.firebase:firebase-database:19.0.0'
 //Firebase Cloud Messaging
-    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation 'com.google.firebase:firebase-messaging:19.+'
 //GSON dependency
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.stepstone.apprating:app-rating:2.3.1'
