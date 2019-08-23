@@ -6,48 +6,41 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
-
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
-
-import com.example.fyp.Activities.CompanyProfile;
 import com.example.fyp.Activities.Homepage;
 import com.example.fyp.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
 import java.util.Random;
-
-import static io.realm.internal.SyncObjectServerFacade.getApplicationContext;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService  {
     private final String ADMIN_CHANNEL_ID ="admin_channel";
-
+    private static final String TAG = "FirebaseIDService";
+    private static final String SUBSCRIBE_TO = "userABC";
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.i("remote message",remoteMessage.getData().toString());
         String my_Id=FirebaseAuth.getInstance().getCurrentUser().getUid();
         String id=remoteMessage.getData().get("id");
         Log.i("remote2",my_Id+"=="+id);
-        if(id.equals(my_Id)){
+//        if(id.equals(my_Id)){
             final Intent intent = new Intent(this, Homepage.class);
             NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
             int notificationID = new Random().nextInt(3000);
 
-      /*
-        Apps targeting SDK 26 or above (Android O) must implement notification channels and add its notifications
-        to at least one of them. Therefore, confirm if version is Oreo or higher, then setup notification channel
-      */
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 setupChannels(notificationManager);
             }
@@ -77,8 +70,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService  {
         }
 
 
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setupChannels(NotificationManager notificationManager){
         CharSequence adminChannelName = "New notification";
@@ -93,6 +84,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService  {
         if (notificationManager != null) {
             notificationManager.createNotificationChannel(adminChannel);
         }
+    }
+
+    @Override
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Refreshed token: " + refreshedToken+"|||||||||"+s);
+        FirebaseMessaging.getInstance().subscribeToTopic(SUBSCRIBE_TO);
+        // TODO: Implement this method to send any registration to your app's servers.
+        sendRegistrationToServer(refreshedToken);
+    }
+
+    private void sendRegistrationToServer(String token) {
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        preferences.edit().putString("token",token).apply();
     }
 }
 

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fyp.Extras.PreferanceFile;
+import com.example.fyp.Models.NOTIFICATIONS;
 import com.example.fyp.Models.ORDERINFO;
 import com.example.fyp.R;
 import com.example.fyp.Services.MySingleton;
@@ -160,17 +162,20 @@ public class OrderDetail extends AppCompatActivity {
                         if(PreferanceFile.getInstance(getApplicationContext()).isIsCompany()){
                             if(status==0){
                                 shipTheOrder();
+                                sendNotificationToCustomer(orderinfo.getProductName()+" order is on the way");
                                 sendNotification(orderinfo.getUserId(),"Order","Your order is on the way");
                             }
 
-                            else if(status==1)
-                                companyFinishOrder();
+                            else if(status==1){
+                                sendNotificationToCustomer(orderinfo.getProductName()+" order is complete");
+                                companyFinishOrder();}
                             else if(status==-1)
                                 deleteOrder();
                         }
                         else{
                             if(status==0) {
                                 cancelOrder();
+                                sendNotificationToCustomer(orderinfo.getProductName()+" order is cancelled");
                                 sendNotification(orderinfo.getCompanyId(),"Order Cancel",orderinfo.getUserFName()+" have cancel the order");
                             }
                             else if(status==2)
@@ -189,6 +194,7 @@ public class OrderDetail extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
+
                     Toast.makeText(OrderDetail.this, "Order is on the way", Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -291,5 +297,17 @@ public class OrderDetail extends AppCompatActivity {
             }
         };
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+    }
+
+
+    private void sendNotificationToCustomer(String title){
+        long time = System.currentTimeMillis();
+        NOTIFICATIONS notification=new NOTIFICATIONS();
+        notification.setId(orderinfo.getUserId());
+        notification.setTime(time+"");
+        notification.setImage(orderinfo.getProductImage());
+        notification.setTitle(title);
+        FirebaseDatabase.getInstance().getReference().child("Notification").child(orderinfo.getUserId()).child(time+"").setValue(notification);
+
     }
 }
