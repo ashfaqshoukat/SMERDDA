@@ -29,18 +29,17 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Activities.NewOrderProduct" />
-        <activity android:name=".Activities.NewOrder" />
-        <activity android:name=".Activities.ShippedMsg" />
-        <activity android:name=".Activities.CompanyProductActivity" />
-        <activity android:name=".Activities.CompanyDetailActivity" />
-        <activity android:name=".Activities.AddressDetail" />
-        <activity android:name=".Activities.signup" />
+        <activity android:name=".Activities.NewOrderProduct" android:theme="@style/SpashScreen"/>
+        <activity android:name=".Activities.NewOrder" android:theme="@style/SpashScreen"/>
+        <activity android:name=".Activities.ShippedMsg" android:theme="@style/SpashScreen" />
+        <activity android:name=".Activities.CompanyProductActivity" android:theme="@style/SpashScreen"/>
+        <activity android:name=".Activities.CompanyDetailActivity" android:theme="@style/SpashScreen"/>
+        <activity android:name=".Activities.AddressDetail" android:theme="@style/SpashScreen"/>
         <activity
             android:name=".Activities.ConfirmActivity"
             android:theme="@style/SpashScreen.Popup" />
-        <activity android:name=".Activities.UploadPic" />
-        <activity android:name=".Activities.ShopActivity" />
+        <activity android:name=".Activities.UploadPic" android:theme="@style/SpashScreen"/>
+        <activity android:name=".Activities.ShopActivity" android:theme="@style/SpashScreen"/>
         <activity
             android:name=".Activities.CompanyProfile"
             android:theme="@style/SpashScreen" />
@@ -67,6 +66,7 @@
         <activity
             android:name=".Activities.Cus_main_signup"
             android:theme="@style/SpashScreen" />
+        <activity android:name=".Activities.signup"/>
         <activity
             android:name=".Activities.SignupHome"
             android:theme="@style/SpashScreen" />
@@ -86,7 +86,6 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
 
-        <receiver android:name=".Services.FirebaseIDService" />
     </application>
 
 </manifest>

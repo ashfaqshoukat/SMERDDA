@@ -47,7 +47,6 @@ public class AddressDetail extends AppCompatActivity {
     DatabaseReference databaseReference;
     CUSTOMERINFO customerinfo;
     COMPANYINFO companyinfo;
-
     final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
     final private String serverKey = "key=" + "AAAAIvjGbME:APA91bGguFNNBwx05QNrFGLBtVb11XHdWNHjFDm7W0jzN0w1HDRHvkLHKux8KC-VMs1jViTNK5wibrxvEtSm6TMsRtddlhzbxmn1323NYbczaQkgVpeVoe5Ao73RPEALR9ypJ5u2mwts";
     final private String contentType = "application/json";
@@ -70,8 +69,8 @@ public class AddressDetail extends AppCompatActivity {
         String o=getIntent().getStringExtra("orderinfo");
         orderinfo=new Gson().fromJson(o,ORDERINFO.class);
 
-        total_Amount=getIntent().getStringExtra("Total_price");
-        Toast.makeText(AddressDetail.this,"Total Price = $" +total_Amount,Toast.LENGTH_LONG).show();
+        //total_Amount=getIntent().getStringExtra("Total_price");
+        //Toast.makeText(AddressDetail.this,"Total Price = $" +total_Amount,Toast.LENGTH_LONG).show();
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +125,9 @@ public class AddressDetail extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(AddressDetail.this, "Order place successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(AddressDetail.this,ShippedMsg.class);
+                    startActivity(intent);
+                    //Toast.makeText(AddressDetail.this, "Order place successfully", Toast.LENGTH_SHORT).show();
                     sendNotification("New Order Received",orderinfo.getProductName());
                     finish();
                 }

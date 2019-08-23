@@ -65,7 +65,7 @@ public class ConfirmActivity extends AppCompatActivity {
                 txt_total.setText(String.valueOf(overTotalPrice));
 //                TotalPrice();
                 Intent intent=new Intent(ConfirmActivity.this, AddressDetail.class);
-                intent.putExtra("Total_price",String.valueOf(overTotalPrice));
+               // intent.putExtra("Total_price",String.valueOf(overTotalPrice));
                 intent.putExtra("orderinfo",order);
                 startActivity(intent);
                 finish();

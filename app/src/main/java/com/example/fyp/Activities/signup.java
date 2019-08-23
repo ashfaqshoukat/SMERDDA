@@ -313,7 +313,7 @@ public class signup extends AppCompatActivity {
 
     }
 
-    private void SaveData(String about) {
+    private void SaveData(String about,String address) {
         Query query = FirebaseDatabase.getInstance().getReference().child("CompanyInfo").orderByChild("compName").equalTo(company);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -333,6 +333,7 @@ public class signup extends AppCompatActivity {
                                 companyInfo.setProfileimage("");
                                 companyInfo.setPhonenbr(et_phonenbr.getText().toString());
                                 companyInfo.setAbout(about);
+                                companyInfo.setAddress(address);
                                // FirebaseDatabase.getInstance().getReference("COMPANYINFO").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(uid).setValue(companyInfo);
                                 FirebaseDatabase.getInstance().getReference("CompanyInfo").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(companyInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -397,7 +398,7 @@ public class signup extends AppCompatActivity {
 
 
                     if(sValue.equalsIgnoreCase(et_CompnayName.getText().toString())){
-                        SaveData(String.valueOf(dsp.child("About").getValue()));
+                        SaveData(String.valueOf(dsp.child("About").getValue()),String.valueOf(dsp.child("Address").getValue()));
                         return;
 
                     }

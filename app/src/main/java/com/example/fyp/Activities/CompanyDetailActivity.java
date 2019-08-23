@@ -62,7 +62,7 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
 
     private static Context instance;
     COMPANYINFO companyInfo;
-    TextView comapnayName, comapanyEmail, feebackBtn, rateCompany;
+    TextView comapnayName, comapanyEmail, feebackBtn, rateCompany,aboutComp,adressComp;
     ImageView profileImage;
     Toolbar toolbar;
     private FirebaseDatabase mFirebaseDatabase;
@@ -96,8 +96,10 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         myRef = mFirebaseDatabase.getReference();
         comapnayName = findViewById(R.id.comapnyname);
         comapanyEmail = findViewById(R.id.email);
+        aboutComp=(TextView)findViewById(R.id.aboutCompany);
         feebackBtn = findViewById(R.id.feebackBtn);
         rateCompany = findViewById(R.id.ratecompany);
+        adressComp=(TextView)findViewById(R.id.comapnyaddress);
         profileImage = findViewById(R.id.image);
         toolbar = findViewById(R.id.toolbar);
         setUpToolbar();
@@ -155,6 +157,8 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         String info = getIntent().getExtras().getString("comapnyinfo");
         companyInfo = new Gson().fromJson(info, COMPANYINFO.class);
         comapnayName.setText(companyInfo.getCompName());
+        aboutComp.setText(companyInfo.getAbout());
+        adressComp.setText(companyInfo.getAddress());
 //        comapanyEmail.setText(companyInfo.getEmail());
         getSupportActionBar().setTitle(companyInfo.getCompName());
         if(!companyInfo.getProfileimage().equalsIgnoreCase("")){
@@ -165,9 +169,8 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
 
     private void setUpToolbar() {
         setSupportActionBar(toolbar);
-
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.back_arrow));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.green));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,7 +185,6 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         inflater.inflate(R.menu.companyproducts, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

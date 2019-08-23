@@ -48,7 +48,8 @@ public class ShippedMsg extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ShippedMsg.this, CompanyProfile.class));
+                finish();
+                startActivity(new Intent(ShippedMsg.this,CompanyDetailActivity.class));
             }
         });
     }
