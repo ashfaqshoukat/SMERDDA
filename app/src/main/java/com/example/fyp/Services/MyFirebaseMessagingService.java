@@ -32,13 +32,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService  {
     private static final String SUBSCRIBE_TO = "userABC";
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.i("remote message",remoteMessage.getData().toString());
-        String my_Id=FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String id=remoteMessage.getData().get("id");
-        Log.i("remote2",my_Id+"=="+id);
-//        if(id.equals(my_Id)){
+        Log.i("remote message", remoteMessage.getData().toString());
+        String my_Id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String id = remoteMessage.getData().get("id");
+        Log.i("remote2", my_Id + "==" + id);
+        if (id.equals(my_Id)) {
             final Intent intent = new Intent(this, Homepage.class);
-            NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             int notificationID = new Random().nextInt(3000);
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -46,7 +46,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService  {
             }
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this , 0, intent,
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                     PendingIntent.FLAG_ONE_SHOT);
 
             Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
@@ -63,11 +63,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService  {
                     .setContentIntent(pendingIntent);
 
             //Set notification color to match your app color template
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 notificationBuilder.setColor(getResources().getColor(R.color.colorPrimaryDark));
             }
             notificationManager.notify(notificationID, notificationBuilder.build());
         }
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)

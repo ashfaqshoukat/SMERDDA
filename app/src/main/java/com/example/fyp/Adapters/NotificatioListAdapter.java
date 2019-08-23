@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fyp.Activities.ShopActivity;
+import com.example.fyp.Extras.PreferanceFile;
 import com.example.fyp.Models.GALLERY;
 import com.example.fyp.Models.NOTIFICATIONS;
 import com.example.fyp.R;
@@ -37,7 +38,7 @@ public class NotificatioListAdapter extends RecyclerView.Adapter<NotificatioList
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         NOTIFICATIONS galleryCur=mGallery.get(position);
         holder.txtTitle.setText(galleryCur.getTitle());
-        holder.txtDate.setText(galleryCur.getTime());
+        holder.txtDate.setText(PreferanceFile.getInstance(mContext).miliToDate(galleryCur.getTime()));
         Picasso.get().load(galleryCur.getImage()).into(holder.image);
 
     }

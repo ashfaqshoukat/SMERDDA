@@ -110,7 +110,7 @@ public class OrderDetail extends AppCompatActivity {
         email.setText(orderinfo.getUserEmail());
         phonenbr.setText(orderinfo.getUserPhoneNbr());
         address.setText(orderinfo.getUserAddress());
-        date.setText(orderinfo.getOrderTime()+"");
+        date.setText(PreferanceFile.getInstance(OrderDetail.this).miliToDate(orderinfo.getOrderTime()+""));
         qty.setText(orderinfo.getProductQty()+" qty");
         totalprice.setText("Rs. "+orderinfo.getProductPrice()*orderinfo.getProductQty());
         price.setText("Rs. "+orderinfo.getProductPrice());

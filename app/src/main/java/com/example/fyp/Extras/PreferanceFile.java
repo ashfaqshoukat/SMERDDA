@@ -7,6 +7,8 @@ import com.example.fyp.Models.COMPANYINFO;
 import com.example.fyp.Models.CUSTOMERINFO;
 import com.google.gson.Gson;
 
+import java.util.Calendar;
+
 public class PreferanceFile {
     private static PreferanceFile preferanceFile = null;
     private static SharedPreferences preferences = null;
@@ -58,4 +60,14 @@ public class PreferanceFile {
     }
 
 
+    public   String miliToDate(String timeStamp){
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(timeStamp));
+
+        int mYear = calendar.get(Calendar.YEAR);
+        int mMonth = calendar.get(Calendar.MONTH);
+        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+        return mDay+"-"+mMonth+"-"+mYear;
+    }
 }
