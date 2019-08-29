@@ -7,19 +7,18 @@
     android:orientation="vertical"
     tools:context=".Activities.Customer_profile"
     android:background="@color/background"
-    android:weightSum="5"
+    android:weightSum="3"
     >
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:cardElevation="10dp"
-        app:cardBackgroundColor="@color/background"
-        android:layout_weight="3"
+        android:layout_height="250dp"
+        app:cardElevation="6dp"
+        android:background="@drawable/loginbackground"
+        app:cardCornerRadius="15dp"
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@drawable/loginbackground"
             >
@@ -31,6 +30,8 @@
                 android:onClick="showPopup"
                 android:id="@+id/img_menu"
                 android:contentDescription="@null"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
                 />
             <com.makeramen.roundedimageview.RoundedImageView
                 android:layout_width="100dp"
@@ -38,7 +39,7 @@
                 android:id="@+id/imageView1"
                 android:src="@drawable/image"
                 app:riv_corner_radius="20dp"
-                app:riv_border_width="2dip"
+                app:riv_border_width="4dip"
                 app:riv_border_color="#ffffff"
                 app:riv_mutate_background="true"
                 android:adjustViewBounds="true"
@@ -60,8 +61,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:fontFamily="sans-serif"
+                android:textSize="25sp"
+                android:text="Faiza Abbas"
+                android:fontFamily="@font/montserratbold"
                 android:textColor="@color/card"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -71,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/latoregulr"
                 android:textColor="@color/card"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -83,11 +85,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:layout_marginTop="30dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-
         >
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -105,8 +106,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/filled_message_filled_32px"
-                    android:textSize="17sp"
-                    android:textColor="@color/darkgrey"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/latoblackitalic"
+                    android:textColor="@color/green"
                     android:id="@+id/Email"
                     android:drawablePadding="30dp"
                     />
@@ -118,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:layout_marginTop="-20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -141,6 +143,10 @@
                     android:drawableStart="@drawable/phone_filled_30px"
                     android:id="@+id/phoneNo"
                     android:drawablePadding="30dp"
+                    android:fontFamily="@font/latoblackitalic"
+                    android:text="0307788999"
+                    android:textSize="20sp"
+                    android:textColor="@color/green"
                     />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:hint="First Name"
+            android:textColorHint="@color/feedback_bg"
             android:textSize="18sp"
             android:textColor="@color/darkgrey"
             android:padding="20dp"
@@ -30,6 +31,7 @@
             android:background="@drawable/shoplayout"
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
+            android:fontFamily="@font/latoregulr"
             />
         <EditText
             android:layout_width="match_parent"
@@ -43,6 +45,8 @@
             android:inputType="text"
             android:background="@drawable/shoplayout"
             android:layout_marginBottom="20dp"
+            android:textColorHint="@color/feedback_bg"
+            android:fontFamily="@font/latoregulr"
             />
         <EditText
             android:layout_width="match_parent"
@@ -56,6 +60,8 @@
             android:inputType="phone"
             android:background="@drawable/shoplayout"
             android:layout_marginBottom="20dp"
+            android:textColorHint="@color/feedback_bg"
+            android:fontFamily="@font/latoregulr"
             />
         <EditText
             android:layout_width="match_parent"
@@ -69,6 +75,8 @@
             android:inputType="textEmailAddress"
             android:background="@drawable/shoplayout"
             android:layout_marginBottom="20dp"
+            android:textColorHint="@color/feedback_bg"
+            android:fontFamily="@font/latoregulr"
             />
         <EditText
             android:layout_width="match_parent"
@@ -82,17 +90,24 @@
             android:padding="20dp"
             android:background="@drawable/shoplayout"
             android:layout_marginBottom="20dp"
+            android:textColorHint="@color/feedback_bg"
+            android:fontFamily="@font/latoregulr"
             />
-        <Button
+        <com.spark.submitbutton.SubmitButton
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Confirm Order"
             android:textColor="@color/white"
-            android:background="@drawable/button_address"
-            android:padding="20dp"
+            app:sub_btn_duration="3000"
+            app:sub_btn_line_color="@color/white"
+            app:sub_btn_ripple_color="@color/green"
+            app:sub_btn_background="@color/white"
+            app:sub_btn_tick_color="@color/white"
             android:id="@+id/btn"
-            android:textSize="18sp"
+            android:gravity="center"
+            android:textSize="23sp"
+            android:fontFamily="@font/crimsonbold"
             />
     </LinearLayout>
 

@@ -53,7 +53,7 @@ public class ConfirmActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int height=metrics.heightPixels;
         int width=metrics.widthPixels;
-        getWindow().setLayout((int)(width*.8),(int)(height*.4));
+        getWindow().setLayout((int)(width*.8),(int)(height*.5));
         WindowManager.LayoutParams params=getWindow().getAttributes();
         params.gravity= Gravity.CENTER;
         params.x=0;
@@ -62,7 +62,7 @@ public class ConfirmActivity extends AppCompatActivity {
         button_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txt_total.setText(String.valueOf(overTotalPrice));
+                //txt_total.setText(String.valueOf(overTotalPrice));
 //                TotalPrice();
                 Intent intent=new Intent(ConfirmActivity.this, AddressDetail.class);
                // intent.putExtra("Total_price",String.valueOf(overTotalPrice));

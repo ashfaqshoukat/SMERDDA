@@ -43,13 +43,13 @@ public class ShippedMsg extends AppCompatActivity {
         getWindow().setAttributes(params);
         button1=(Button)findViewById(R.id.ok);
         txt=(TextView)findViewById(R.id.txtMsg);
-        databaseReference= FirebaseDatabase.getInstance().getReference("ConfirmOrder").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        CheckOrder();
+       // databaseReference= FirebaseDatabase.getInstance().getReference("Order").child();
+        //CheckOrder();
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(ShippedMsg.this,ShopActivity.class));
                 finish();
-                startActivity(new Intent(ShippedMsg.this,CompanyDetailActivity.class));
             }
         });
     }

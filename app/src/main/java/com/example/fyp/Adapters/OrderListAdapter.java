@@ -19,6 +19,7 @@ import com.example.fyp.Models.GALLERY;
 import com.example.fyp.Models.ORDERINFO;
 import com.example.fyp.R;
 import com.google.gson.Gson;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -42,9 +43,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
     public void onBindViewHolder(@NonNull OrderViewHolder orderViewHolder, int position) {
         ORDERINFO newOrderModel=mGallery.get(position);
         orderViewHolder.productname.setText(newOrderModel.getProductName());
-        orderViewHolder.price.setText("RS. "+newOrderModel.getProductPrice());
+        orderViewHolder.price.setText("$ "+newOrderModel.getProductPrice());
         orderViewHolder.qty.setText(newOrderModel.getProductQty()+" Qty");
-        orderViewHolder.tottalprice.setText("RS. "+newOrderModel.getProductPrice()*newOrderModel.getProductQty()+"");
+        orderViewHolder.tottalprice.setText("$ "+newOrderModel.getProductPrice()*newOrderModel.getProductQty()+"");
         Picasso.get().load(newOrderModel.getProductImage()).placeholder(mContext.getDrawable(R.drawable.smerdapng)).into(orderViewHolder.image);
 
         orderViewHolder.ordeDetail.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +66,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
 
     class OrderViewHolder extends RecyclerView.ViewHolder{
         TextView productname,qty,price,tottalprice;
-        ImageView image;
+        RoundedImageView image;
         TextView txt,ordeDetail;
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);

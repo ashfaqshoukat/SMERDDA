@@ -1,5 +1,6 @@
 package com.example.fyp.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import io.realm.Progress;
+
 public class Customer_signin extends AppCompatActivity {
 EditText et_cus_email,et_cus_pass;
 Button cus_signin;
@@ -30,6 +33,7 @@ TextView ed_forgot_pass;
 FirebaseAuth mAth;
 FirebaseUser firebaseUser;
 String email,password;
+ProgressDialog pd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +84,16 @@ String email,password;
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    pd=new ProgressDialog(Customer_signin.this);
+                    pd.setMessage("Account Verified...");
+                    pd.setCancelable(false);
+                    pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    pd.show();
                     updateFirebaseToken();
                     checkEmailVerification();
                 }
                 else {
+                    pd.dismiss();
                     Toast.makeText(Customer_signin.this,"Please first registered yourself",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(Customer_signin.this,Customer_signup.class);
                 }

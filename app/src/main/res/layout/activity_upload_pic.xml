@@ -6,31 +6,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="7"
-    tools:context=".Activities.UploadPic">
+    tools:context=".Activities.UploadPic"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="20dp"
+    android:background="@color/white"
+    >
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:id="@+id/image_upload"
         android:src="@drawable/image"
         android:layout_marginBottom="10dp"
         />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/cyan"
-        android:text="Choose pic"
-        android:textColor="@color/card"
-        android:id="@+id/choosePhoto"
-        />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:hint="Enter Product Name"
         android:id="@+id/product_upload"
-
+        android:fontFamily="@font/latoblackitalic"
+        android:textColor="@color/feedback_bg"
+        android:textSize="20sp"
+        android:inputType="text"
         />
     <EditText
         android:layout_width="match_parent"
@@ -39,6 +41,10 @@
         android:hint="Enter Price"
         android:layout_marginBottom="10dp"
         android:id="@+id/price_upload"
+        android:fontFamily="@font/latoblackitalic"
+        android:textColor="@color/feedback_bg"
+        android:textSize="20sp"
+        android:inputType="number"
         />
 
     <EditText
@@ -47,16 +53,38 @@
         android:layout_weight="1"
         android:hint="Product Description"
         android:id="@+id/descriptionProduct"
-
+        android:fontFamily="@font/latoitalic"
+        android:textColor="@color/feedback_bg"
+        android:textSize="17sp"
+        android:inputType="textMultiLine"
         />
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_weight="1"
-        android:text="Upload Image"
-        android:textColor="@color/card"
-        android:background="@color/cyan"
-        android:id="@+id/uploadPhoto"
-        />
-
+        android:gravity="bottom"
+        android:layout_marginBottom="20dp"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/choosepic"
+            android:text="Choose pic"
+            android:textColor="@color/card"
+            android:id="@+id/choosePhoto"
+            android:layout_marginEnd="10dp"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Upload Image"
+            android:textColor="@color/feedback_bg"
+            android:background="@drawable/uploadpic"
+            android:id="@+id/uploadPhoto"
+            android:layout_marginStart="10dp"
+            />
+    </LinearLayout>
 </LinearLayout>

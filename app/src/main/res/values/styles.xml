@@ -9,6 +9,10 @@
     <style name="SpashScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimaryDark">@color/bar</item>
     </style>
+    <style name="BarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimaryDark">@color/bar</item>
+        <item name="colorPrimary">@color/green</item>
+    </style>
     <style name="SpashScreen.Popup" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/bar</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -24,7 +28,7 @@
 
     <style name="Appbar" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">35sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">@font/latobold</item>
         <item name="android:typeface">sans</item>
     </style>

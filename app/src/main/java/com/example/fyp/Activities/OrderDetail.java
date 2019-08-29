@@ -112,8 +112,8 @@ public class OrderDetail extends AppCompatActivity {
         address.setText(orderinfo.getUserAddress());
         date.setText(PreferanceFile.getInstance(OrderDetail.this).miliToDate(orderinfo.getOrderTime()+""));
         qty.setText(orderinfo.getProductQty()+" qty");
-        totalprice.setText("Rs. "+orderinfo.getProductPrice()*orderinfo.getProductQty());
-        price.setText("Rs. "+orderinfo.getProductPrice());
+        totalprice.setText("$ "+orderinfo.getProductPrice()*orderinfo.getProductQty());
+        price.setText("$ "+orderinfo.getProductPrice());
         productname.setText(orderinfo.getProductName());
         Picasso.get().load(orderinfo.getProductImage()).placeholder(getDrawable(R.drawable.smerdapng)).into(image);
         if(PreferanceFile.getInstance(getApplicationContext()).isIsCompany()){

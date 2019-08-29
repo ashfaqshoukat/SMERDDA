@@ -16,6 +16,7 @@
             android:layout_height="60dp"
             android:background="@color/green"
             android:id="@+id/tool"
+            app:titleTextAppearance="@style/Appbar"
             >
             <TextView
                 android:layout_width="wrap_content"

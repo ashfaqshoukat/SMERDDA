@@ -12,10 +12,12 @@
         android:orientation="vertical">
 <androidx.appcompat.widget.Toolbar
     android:id="@+id/toolbar"
-    android:background="@color/colorPrimary"
+    android:background="@color/green"
     app:title="Order Detail"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    app:titleTextAppearance="@style/Appbar"
+    />
 
         <ImageView
             android:id="@+id/image"
@@ -27,14 +29,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingTop="12dp"
             android:paddingRight="10dp"
             android:paddingBottom="15dp"
-            android:weightSum="2">
+            android:weightSum="1">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -45,48 +47,63 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:text="Product Name:"
                     android:textColor="@color/black"
-                    android:textSize="14dp" />
+                    android:textSize="16sp"
+                    android:fontFamily="@font/latobold"
+                    />
 
                 <TextView
                     android:id="@+id/productname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Dr Muhamad Kahn Qondal"
-                    android:textColor="@color/black"
-                    android:textSize="12dp" />
+                    android:text=" "
+                    android:textColor="@color/feedback_bg"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/latoregulr"
+                    />
             </LinearLayout>
-
-            <LinearLayout
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.07dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/grey" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="12dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="15dp"
+            >
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                android:text="Qty:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/latobold"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
-                    android:text="Qty:"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/qty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Male"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:textSize="12dp" />
-            </LinearLayout>
-
-
+            <TextView
+                android:id="@+id/qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="2"
+                android:textColor="@color/feedback_bg"
+                android:textSize="13sp"
+                android:fontFamily="@font/latoregulr"/>
         </LinearLayout>
-
         <View
             android:layout_width="match_parent"
             android:layout_height="0.07dp"
@@ -97,41 +114,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingTop="12dp"
             android:paddingRight="10dp"
             android:paddingBottom="15dp"
-            android:weightSum="2">
+            android:weightSum="1">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
+            <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:text="Product Price"
                     android:textColor="@color/black"
-                    android:textSize="14dp" />
+                    android:textSize="16sp"
+                    android:fontFamily="@font/latobold"
+                    />
 
                 <TextView
                     android:id="@+id/productPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="ENT Doctor"
-                    android:textColor="@color/black"
-                    android:textSize="12dp" />
+                    android:text="122222"
+                    android:textColor="@color/feedback_bg"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/latoregulr"/>
             </LinearLayout>
-
-
-        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -143,8 +155,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             android:paddingLeft="10dp"
             android:paddingTop="12dp"
             android:paddingRight="10dp"
@@ -154,20 +166,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-
                 android:text="Total Price:"
                 android:textColor="@color/black"
-                android:textSize="14dp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/latobold"
+                />
 
             <TextView
                 android:id="@+id/totalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-
-                android:text="M.B.B.S"
-                android:textColor="@color/black"
-                android:textSize="12dp" />
+                android:text="1222233999"
+                android:textColor="@color/feedback_bg"
+                android:textSize="13sp"
+                android:fontFamily="@font/latoregulr"/>
         </LinearLayout>
 
         <View
@@ -180,37 +193,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingTop="12dp"
             android:paddingRight="10dp"
             android:paddingBottom="15dp"
-            android:weightSum="2">
+            android:layout_weight="1">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="12dp"
-
+                android:layout_marginEnd="12dp"
                 android:text="Address:"
                 android:textColor="@color/black"
-                android:textSize="14dp"
-
+                android:textSize="16sp"
+                android:fontFamily="@font/latobold"
                 />
-
             <TextView
                 android:id="@+id/addr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-
-                android:text="Bilal Block Nishatr colony Feroz Pur Road Lahore"
-                android:textColor="@color/black"
-                android:textSize="12dp" />
+                android:text="Commissioner Road Sialkot"
+                android:textColor="@color/feedback_bg"
+                android:textSize="13sp"
+                android:fontFamily="@font/latoregulr"/>
         </LinearLayout>
 
 
@@ -224,38 +235,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingTop="12dp"
             android:paddingRight="10dp"
             android:paddingBottom="15dp"
-            android:weightSum="2">
+            android:layout_weight="1">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="12dp"
-
+                android:layout_marginEnd="12dp"
                 android:text="Email:"
                 android:textColor="@color/black"
-                android:textSize="14dp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/latobold"/>
 
             <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-
-                android:text="I am doctor of ent and i have experience about one year in this field"
-                android:textColor="@color/black"
-                android:textSize="12dp" />
+                android:text="faizaabbas081@gmail.com"
+                android:textColor="@color/feedback_bg"
+                android:textSize="13sp"
+                android:fontFamily="@font/latoregulr"/>
         </LinearLayout>
-
-
         <View
             android:layout_width="match_parent"
             android:layout_height="0.07dp"
@@ -266,81 +275,73 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="15dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="15dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="12dp"
-
-                android:text="Customer Name"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
-
-
-            <TextView
-                android:id="@+id/customerName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-
-                android:text="12233434"
-                android:textColor="@color/black"
-                android:textSize="12dp" />
-
-
-            />
-        </LinearLayout>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.07dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/grey" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingTop="15dp"
             android:paddingRight="10dp"
             android:paddingBottom="15dp"
-        >
-
+            android:layout_weight="1">
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="12dp"
-
-                android:text="Phone No: :"
+                android:layout_marginEnd="12dp"
+                android:text="Customer Name"
                 android:textColor="@color/black"
-                android:textSize="14dp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/latobold"/>
+            <TextView
+                android:id="@+id/customerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Faiza Abbas"
+                android:textColor="@color/feedback_bg"
+                android:textSize="13sp"
+                android:fontFamily="@font/latoregulr"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.07dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="15dp"
+            android:layout_weight="1"
+        >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="12dp"
+                android:text="Phone No: "
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/latobold"/>
 
             <TextView
                 android:id="@+id/phoneNbr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-
                 android:text="0323232332"
-                android:textColor="@color/black"
-                android:textSize="12dp" />
-
+                android:textColor="@color/feedback_bg"
+                android:textSize="13sp"
+                android:fontFamily="@font/latoregulr"
+                />
 
         </LinearLayout>
         <View
@@ -349,48 +350,42 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@color/grey" />
-
-
-
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="15dp">
+                android:paddingBottom="15dp"
+                android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
-
+                    android:layout_marginEnd="10dp"
                     android:text="Order Time:"
                     android:textColor="@color/black"
-                    android:textSize="14dp" />
-
+                    android:textSize="16sp"
+                    android:fontFamily="@font/latobold"/>
                 <TextView
                     android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-
                     android:text="8:00 to 23:00"
-                    android:textColor="@color/black"
-                    android:textSize="12dp" />
+                    android:textColor="@color/feedback_bg"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/latoregulr"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
@@ -402,10 +397,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
-
                     android:text="Order Status:"
                     android:textColor="@color/black"
-                    android:textSize="14dp" />
+                    android:textSize="16sp"
+                    android:fontFamily="@font/latobold"
+                    />
 
                 <TextView
                     android:id="@+id/ordeSatus"
@@ -419,22 +415,16 @@
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
                     android:paddingRight="50dp"
-                    android:textSize="15dp" />
+                    android:textSize="17sp"
+                    android:fontFamily="@font/latoregulr"/>
             </LinearLayout>
-
-
-
         <View
             android:layout_width="match_parent"
             android:layout_height="0.07dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@color/grey" />
-
-
-
         <TextView
-
             android:id="@+id/orderBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -445,11 +435,12 @@
             android:paddingBottom="10dp"
             android:gravity="center"
             android:layout_margin="20dp"
-            android:textColor="@color/white"
-            android:background="@color/colorPrimary"
+            android:textColor="@color/feedback_bg"
+            android:background="@drawable/cart_button"
             android:text="Order Proceess"
             android:textAlignment="center"
-            android:textSize="15dp" />
+            android:textSize="17sp"
+            android:fontFamily="@font/latoregulr"/>
 
 
     </LinearLayout>

@@ -97,7 +97,7 @@ class OrderViewHolder extends RecyclerView.ViewHolder{
         emailuser=(TextView) itemView.findViewById(R.id.email_order);
         phone=(TextView) itemView.findViewById(R.id.phoneNum);
         address=(TextView) itemView.findViewById(R.id.address_order);
-        txt=(TextView) itemView.findViewById(R.id.btn_new);
+        txt=(TextView) itemView.findViewById(R.id.orderdetail);
         ordeDetail=itemView.findViewById(R.id.orderdetail);
         cardView=itemView.findViewById(R.id.cardview);
     }

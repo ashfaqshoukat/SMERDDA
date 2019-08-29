@@ -54,9 +54,6 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:orientation="vertical">
-
-
-
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -69,7 +66,9 @@
                 android:textColor="@color/darkgrey"
                 android:drawableEnd="@drawable/user_30px"
                 android:textSize="20sp"
-                android:id="@+id/company"/>
+                android:id="@+id/company"
+                android:layout_marginTop="20dp"
+                />
 
             <EditText
                 android:layout_width="300dp"
@@ -86,7 +85,7 @@
                 android:textSize="20sp"
                 android:id="@+id/email"/>
 
-            <EditText
+           <!-- <EditText
                 android:id="@+id/phoneNo"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -99,7 +98,7 @@
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp"
                 android:textColor="@color/darkgrey"
-                android:textSize="20sp" />
+                android:textSize="20sp" />-->
 
             <EditText
                 android:layout_width="300dp"

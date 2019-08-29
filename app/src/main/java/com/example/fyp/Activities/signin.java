@@ -1,4 +1,5 @@
 package com.example.fyp.Activities;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -46,12 +47,11 @@ public class signin extends AppCompatActivity {
     FirebaseUser firebaseUser;
     String company,email,password;
     String Name =  "";
-
+    ProgressDialog progressDialog;
     List<String> lstName = new ArrayList<String>();
     List<String> lstEmail = new ArrayList<String>();
 
     HelperProfile objName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +107,7 @@ public class signin extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
+                            progressDialog.dismiss();
                             MatchMulitCompnayName();
                             updateFirebaseToken();
 
@@ -152,6 +153,7 @@ public class signin extends AppCompatActivity {
         Boolean emailFlag=firebaseUser.isEmailVerified();
         if (emailFlag){
             //startActivity(new Intent(signin.this,CompanyProfile.class));
+            progressDialog.dismiss();
             return true;
 
         }
@@ -163,7 +165,11 @@ public class signin extends AppCompatActivity {
     }
     private void MatchMulitCompnayName()
     {
-
+         progressDialog=new ProgressDialog(signin.this);
+         progressDialog.setCancelable(false);
+         progressDialog.setMessage("Verified Account.Please wait...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
         DatabaseReference ref1= FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref2;
         ref2 = ref1.child("CompanyInfo");

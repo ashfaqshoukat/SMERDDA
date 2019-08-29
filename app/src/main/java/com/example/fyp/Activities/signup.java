@@ -73,7 +73,7 @@ public class signup extends AppCompatActivity {
         et_Email = findViewById(R.id.email);
         et_Password = findViewById(R.id.password);
         et_repass = findViewById(R.id.re_pass);
-        et_phonenbr = findViewById(R.id.phoneNo);
+       // et_phonenbr = findViewById(R.id.phoneNo);
          InitRealmConfig();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("CompanyInfo");
@@ -331,7 +331,7 @@ public class signup extends AppCompatActivity {
                                // String uid=firebaseAuth.getCurrentUser().getUid();
                                 final COMPANYINFO companyInfo = new COMPANYINFO(company, email, password);
                                 companyInfo.setProfileimage("");
-                                companyInfo.setPhonenbr(et_phonenbr.getText().toString());
+                                //companyInfo.setPhonenbr(et_phonenbr.getText().toString());
                                 companyInfo.setAbout(about);
                                 companyInfo.setAddress(address);
                                // FirebaseDatabase.getInstance().getReference("COMPANYINFO").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(uid).setValue(companyInfo);

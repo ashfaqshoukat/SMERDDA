@@ -6,26 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activities.NewOrder">
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        >
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:background="@color/green"
             android:id="@+id/tool"
+app:titleTextAppearance="@style/Appbar"
+            app:title="Customer Orders"
             >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Customer Orders"
-                android:textColor="@color/card"
-                android:textSize="20sp"
-                />
         </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

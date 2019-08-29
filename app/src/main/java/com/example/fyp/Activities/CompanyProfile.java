@@ -55,6 +55,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
@@ -66,11 +67,11 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
     RecyclerView mRecyclerView;
     GalleryAdapter mAdapter;
     ArrayList<GALLERY> mGallery;
-    TextView txtabout,txtCompany,txtEmail,txtemail,txtphonenbr;
+    TextView txtabout,txtCompany,txtEmail,txtAddress,txtphonenbr;
     TextView button2;
     String Name;
     public static final int PICK_IMAGE_Gallery = 1;
-    RoundedImageView circularimage;
+    CircleImageView circularimage;
     HelperProfile objHelperProfile ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +79,12 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
         setContentView(R.layout.activity_company_profile);
         txtabout = (TextView) findViewById(R.id.about);
         txtCompany = (TextView) findViewById(R.id.companyName);
+        txtAddress=(TextView)findViewById(R.id.Address);
         imageView_add = (ImageView) findViewById(R.id.addPic);
-        chooseImage=(ImageView)findViewById(R.id.choosePic);
+        //chooseImage=(ImageView)findViewById(R.id.choosePic);
         button2 = (TextView) findViewById(R.id.newOrder);
         txtEmail=findViewById(R.id.email);
-        circularimage=(RoundedImageView)findViewById(R.id.circularimage);
+        circularimage=(CircleImageView) findViewById(R.id.circularimage);
         firebaseAuth = FirebaseAuth.getInstance();
         objHelperProfile = new HelperProfile(CompanyProfile.this);
         databaseReference = FirebaseDatabase.getInstance().getReference("CompanyInfo").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -107,7 +109,7 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
                 startActivity(new Intent(CompanyProfile.this, UploadPic.class));
             }
         });
-        chooseImage.setOnClickListener(new View.OnClickListener() {
+        circularimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showFileImage();
@@ -138,8 +140,10 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
                     {
 
                         String sAbout =  String.valueOf(dsp.child("About").getValue());
+                        String sAddress=String.valueOf(dsp.child("Address").getValue());
                         txtCompany.setText(sCompnayName);
                         txtabout.setText(sAbout);
+                        txtAddress.setText(sAddress);
 
                     }
                 }
@@ -160,14 +164,14 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
         PopupMenu popup = new PopupMenu(this, v);
         // This activity implements OnMenuItemClickListener
         popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.profile_menu);
+        popup.inflate(R.menu.menu2);
         popup.show();
     }
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.item_home1:
-                startActivity(new Intent(CompanyProfile.this, Homepage.class));
+            case R.id.about:
+                startActivity(new Intent(CompanyProfile.this, Facebook.class));
                 return true;
             case R.id.item_logout:
                 Logout();
@@ -190,7 +194,7 @@ public class CompanyProfile extends AppCompatActivity implements PopupMenu.OnMen
         }
     }
     private void uploadImages(Uri filePath) {
-        chooseImage.setVisibility(View.VISIBLE);
+        //chooseImage.setVisibility(View.VISIBLE);
         circularimage.setImageURI(filePath);
 
         if (filePath != null) {

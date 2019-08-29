@@ -69,7 +69,7 @@ public class Customer_profile extends AppCompatActivity implements PopupMenu.OnM
         t_phone = findViewById(R.id.phoneNo);
         menu = findViewById(R.id.img_menu);
         roundedImageView = findViewById(R.id.imageView1);
-        choosePicBtn = findViewById(R.id.choosePic);
+        //choosePicBtn = findViewById(R.id.choosePic);
         uploadPic = findViewById(R.id.uploadPic);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();

@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Text"
+            android:text="Dear,Your order has been processed."
             android:id="@+id/txtMsg"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -55,6 +55,7 @@
             android:textSize="20sp"
             android:layout_marginTop="30dp"
             android:id="@+id/ok"
+            android:background="@drawable/choosepic"
 
             />
     </LinearLayout>

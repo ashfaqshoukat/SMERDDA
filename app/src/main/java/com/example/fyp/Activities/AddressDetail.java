@@ -125,7 +125,7 @@ public class AddressDetail extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Intent intent=new Intent(AddressDetail.this,ShippedMsg.class);
+                   Intent intent=new Intent(AddressDetail.this,ShippedMsg.class);
                     startActivity(intent);
                     //Toast.makeText(AddressDetail.this, "Order place successfully", Toast.LENGTH_SHORT).show();
                     sendNotification("New Order Received",orderinfo.getProductName());
@@ -139,7 +139,7 @@ public class AddressDetail extends AppCompatActivity {
     private void fillForm(){
         if(PreferanceFile.getInstance(getApplicationContext()).isIsCompany()){
             companyinfo=PreferanceFile.getInstance(getApplicationContext()).getCompany();
-            edit_phone.setText(companyinfo.getPhonenbr());
+           // edit_phone.setText(companyinfo.getPhonenbr());
             edit_email.setText(companyinfo.getEmail());
             orderinfo.setUserId(companyinfo.getCompanyId());
             orderinfo.setUserImage(companyinfo.getProfileimage());

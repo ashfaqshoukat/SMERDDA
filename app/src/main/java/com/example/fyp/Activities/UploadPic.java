@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -70,6 +71,7 @@ public class UploadPic extends AppCompatActivity {
                     Toast.makeText(UploadPic.this,"Upload in progress",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    VerificationField();
                     uploadImage();
                 }
             }
@@ -81,6 +83,23 @@ public class UploadPic extends AppCompatActivity {
             }
         });
 
+    }
+    private void VerificationField(){
+        String name=edit_name.getText().toString();
+        String price=edit_price.getText().toString();
+        String description=edit_description.getText().toString();
+        if (TextUtils.isEmpty(name)){
+            edit_name.setError("Please enter product name");
+            edit_name.requestFocus();
+        }
+        if (TextUtils.isEmpty(price)){
+            edit_price.setError("Please enter product price");
+            edit_price.requestFocus();
+        }
+        if (TextUtils.isEmpty(description)){
+            edit_description.setError("Please write the product description");
+            edit_description.requestFocus();
+        }
     }
     private void showFileChoose(){
         Intent intent=new Intent();

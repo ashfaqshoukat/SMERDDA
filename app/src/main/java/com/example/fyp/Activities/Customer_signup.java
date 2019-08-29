@@ -1,5 +1,6 @@
 package com.example.fyp.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class Customer_signup extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
     String userName, email, phoneNo, address, password;
+    ProgressDialog proDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,13 +112,19 @@ public class Customer_signup extends AppCompatActivity {
         query1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                proDialog=new ProgressDialog(Customer_signup.this);
                 if (dataSnapshot.getChildrenCount() > 0) {
+                    proDialog.dismiss();
                     Toast.makeText(Customer_signup.this, "Email already exist", LENGTH_SHORT).show();
                 } else {
                     firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                proDialog.setMessage("Account is creating..Wait");
+                                proDialog.setCancelable(false);
+                                proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                proDialog.show();
                                 final CUSTOMERINFO customerInfo = new CUSTOMERINFO(userName, email, phoneNo, address, password,"");
                                 FirebaseDatabase.getInstance().getReference("CustomerInfo").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(customerInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -129,6 +137,7 @@ public class Customer_signup extends AppCompatActivity {
 
 
                                         } else {
+                                            proDialog.dismiss();
                                             Toast.makeText(Customer_signup.this, "User already Registered,please change your email", LENGTH_SHORT).show();
                                         }
 

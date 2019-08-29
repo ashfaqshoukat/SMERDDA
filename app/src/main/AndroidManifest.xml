@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.CustomerOrder"></activity>
-        <activity android:name=".Activities.OrderDetail" />
+        <activity android:name=".Activities.CustomerOrder" android:theme="@style/SpashScreen"></activity>
+        <activity android:name=".Activities.OrderDetail" android:theme="@style/SpashScreen"/>
 
         <service
             android:name=".Services.MyFirebaseMessagingService"
@@ -31,11 +31,11 @@
         <activity android:name=".Activities.ShippedMsg" android:theme="@style/SpashScreen" />
         <activity android:name=".Activities.CompanyProductActivity" android:theme="@style/SpashScreen"/>
         <activity android:name=".Activities.CompanyDetailActivity" android:theme="@style/SpashScreen"/>
-        <activity android:name=".Activities.AddressDetail" android:theme="@style/SpashScreen"/>
+        <activity android:name=".Activities.AddressDetail" android:theme="@style/BarTheme" android:label="Address Detail" />
         <activity
             android:name=".Activities.ConfirmActivity"
             android:theme="@style/SpashScreen.Popup" />
-        <activity android:name=".Activities.UploadPic" android:theme="@style/SpashScreen"/>
+        <activity android:name=".Activities.UploadPic" android:theme="@style/BarTheme" android:label="Upload Picture"/>
         <activity android:name=".Activities.ShopActivity" android:theme="@style/SpashScreen"/>
         <activity
             android:name=".Activities.CompanyProfile"

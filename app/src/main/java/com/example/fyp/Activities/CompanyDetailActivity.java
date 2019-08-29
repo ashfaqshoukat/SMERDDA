@@ -57,9 +57,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 public class CompanyDetailActivity extends AppCompatActivity implements RatingDialogListener {
-
     private static Context instance;
     COMPANYINFO companyInfo;
     TextView comapnayName, comapanyEmail, feebackBtn, rateCompany,aboutComp,adressComp;
@@ -239,12 +237,12 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
                 .setDescription("Please select some stars and give your feedback")
                 .setCommentInputEnabled(true)
                 .setDefaultComment("Good Company")
-                .setStarColor(R.color.colorPrimary)
+                .setStarColor(R.color.green)
                 .setNoteDescriptionTextColor(R.color.design_default_color_primary)
                 .setTitleTextColor(R.color.design_default_color_primary)
                 .setDescriptionTextColor(R.color.colorAccent)
                 .setHint("Please write your comment here ...")
-                .setHintTextColor(R.color.design_default_color_primary_dark)
+                .setHintTextColor(R.color.feedback_bg)
                 .setCommentTextColor(R.color.black)
                 .setCommentBackgroundColor(R.color.white)
 //                .setWindowAnimation(R.style.MyDialogFadeAnimation)
