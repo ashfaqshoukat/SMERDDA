@@ -117,14 +117,12 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         emailImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 sendEmail();
             }
         });
         feebackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 //                showDialog();
                 FragmentManager fm = getSupportFragmentManager();
                 FeedbackDialog editNameDialogFragment = new FeedbackDialog();
