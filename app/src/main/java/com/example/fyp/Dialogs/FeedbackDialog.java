@@ -39,7 +39,6 @@ public class FeedbackDialog extends DialogFragment {
         init(view);
         allListener();
         return view;
-
     }
 
     private void init(View view) {
@@ -70,7 +69,6 @@ public class FeedbackDialog extends DialogFragment {
                         {"AVERAGE","SLOW","LATE","YES","NOT RECOMENDED"},
                         {"GOOD","NORMAL","QUICKLY","NO","RECOMENDED"}
                 };
-
                 ID3 classifier = new ID3();
                 classifier.train(trainingData);
                 classifier.printTree();
@@ -78,7 +76,6 @@ public class FeedbackDialog extends DialogFragment {
 //                Toast.makeText(getContext(),testData.toString(),Toast.LENGTH_LONG).show();;
             }
         });
-
         quality.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -153,7 +150,5 @@ public class FeedbackDialog extends DialogFragment {
             }
         });
 
-
     }
-
 }

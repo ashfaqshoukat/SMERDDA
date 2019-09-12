@@ -41,6 +41,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         GALLERY galleryCur=mGallery.get(position);
         holder.prod_name.setText(galleryCur.getProduct_title());
         holder.prod_price.setText("$"+galleryCur.getProduct_price());
+        holder.prod_des.setText(galleryCur.getProduct_description());
         String image=galleryCur.getProduct_image();
         // String url="https://firebasestorage.googleapis.com/v0/b/smerda-344e3.appspot.com/o?name=ImageGallery%2F1562920350396.jpg&uploadType=resumable&upload_id=AEnB2Ure0oCg2EGnm8JfUyCLdL56EbQAnddxmysm_4f38qrfwD-bqsDd6qZnao-hxxCunqUaLegBzlzUofkeNvA6T8rYQiUTWw&upload_protocol=resumable";
         Picasso.get().load(image).into(holder.prod_img);

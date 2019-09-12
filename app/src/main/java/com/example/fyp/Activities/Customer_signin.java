@@ -62,6 +62,11 @@ ProgressDialog pd;
         @Override
         public void onClick(View v) {
             LoginButton();
+            pd=new ProgressDialog(Customer_signin.this);
+            pd.setMessage("Account Verified...");
+            pd.setCancelable(false);
+            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pd.show();
         }
     };
     private void LoginButton(){
@@ -84,11 +89,6 @@ ProgressDialog pd;
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    pd=new ProgressDialog(Customer_signin.this);
-                    pd.setMessage("Account Verified...");
-                    pd.setCancelable(false);
-                    pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    pd.show();
                     updateFirebaseToken();
                     checkEmailVerification();
                 }
@@ -105,10 +105,12 @@ ProgressDialog pd;
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         Boolean emailFlag=firebaseUser.isEmailVerified();
         if (emailFlag){
+            pd.dismiss();
             startActivity(new Intent(Customer_signin.this,Customer_profile.class));
 
         }
         else {
+            pd.dismiss();
             Toast.makeText(Customer_signin.this,"Verify your Email",Toast.LENGTH_SHORT).show();
             mAth.signOut();
         }

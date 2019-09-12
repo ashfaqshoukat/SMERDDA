@@ -107,7 +107,7 @@ public class signin extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            progressDialog.dismiss();
+                            //progressDialog.dismiss();
                             MatchMulitCompnayName();
                             updateFirebaseToken();
 
@@ -153,7 +153,7 @@ public class signin extends AppCompatActivity {
         Boolean emailFlag=firebaseUser.isEmailVerified();
         if (emailFlag){
             //startActivity(new Intent(signin.this,CompanyProfile.class));
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
             return true;
 
         }
@@ -165,11 +165,11 @@ public class signin extends AppCompatActivity {
     }
     private void MatchMulitCompnayName()
     {
-         progressDialog=new ProgressDialog(signin.this);
+        /* progressDialog=new ProgressDialog(signin.this);
          progressDialog.setCancelable(false);
          progressDialog.setMessage("Verified Account.Please wait...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
+        progressDialog.show();*/
         DatabaseReference ref1= FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref2;
         ref2 = ref1.child("CompanyInfo");

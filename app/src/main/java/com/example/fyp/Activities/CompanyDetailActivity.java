@@ -2,6 +2,7 @@ package com.example.fyp.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -60,8 +61,8 @@ import java.util.Map;
 public class CompanyDetailActivity extends AppCompatActivity implements RatingDialogListener {
     private static Context instance;
     COMPANYINFO companyInfo;
-    TextView comapnayName, comapanyEmail, feebackBtn, rateCompany,aboutComp,adressComp;
-    ImageView profileImage;
+    TextView comapnayName, comapanyEmail, feebackBtn, rateCompany,aboutComp,adressComp,emailComp,phoneComp;
+    ImageView profileImage,emailImage,phoneImage;
     Toolbar toolbar;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
@@ -95,12 +96,31 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         comapnayName = findViewById(R.id.comapnyname);
         comapanyEmail = findViewById(R.id.email);
         aboutComp=(TextView)findViewById(R.id.aboutCompany);
+        emailComp=(TextView)findViewById(R.id.emailDetail);
+        emailImage=(ImageView)findViewById(R.id.emailDetailImage);
+        phoneImage=(ImageView)findViewById(R.id.phoneDetail);
+        phoneComp=(TextView)findViewById(R.id.phonenoDetail);
         feebackBtn = findViewById(R.id.feebackBtn);
         rateCompany = findViewById(R.id.ratecompany);
         adressComp=(TextView)findViewById(R.id.comapnyaddress);
         profileImage = findViewById(R.id.image);
         toolbar = findViewById(R.id.toolbar);
         setUpToolbar();
+        phoneImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phone=phoneComp.getText().toString();
+                Intent intent1=new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+Uri.encode(phone)));
+                startActivity(intent1);
+            }
+        });
+        emailImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                sendEmail();
+            }
+        });
         feebackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,14 +177,27 @@ public class CompanyDetailActivity extends AppCompatActivity implements RatingDi
         comapnayName.setText(companyInfo.getCompName());
         aboutComp.setText(companyInfo.getAbout());
         adressComp.setText(companyInfo.getAddress());
-//        comapanyEmail.setText(companyInfo.getEmail());
+        emailComp.setText(companyInfo.getEmailCompany());
+        phoneComp.setText(companyInfo.getPhone());
         getSupportActionBar().setTitle(companyInfo.getCompName());
         if(!companyInfo.getProfileimage().equalsIgnoreCase("")){
             Picasso.get().load(companyInfo.getProfileimage()).placeholder(getDrawable(R.drawable.smerdapng)).into(profileImage);
         }
         getAllCompanyRating();
     }
-
+private void sendEmail(){
+    String emailCom=emailComp.getText().toString();
+Intent emailIntent=new Intent(Intent.ACTION_SEND);
+emailIntent.setData(Uri.parse("mailto:"));
+emailIntent.setType("text/plain");
+emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailCom});
+try {
+startActivity(Intent.createChooser(emailIntent,"Choose an Email Client"));
+}
+catch (Exception e){
+Toast.makeText(CompanyDetailActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+}
+}
     private void setUpToolbar() {
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.back_arrow));

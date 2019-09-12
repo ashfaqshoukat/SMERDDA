@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.spark.submitbutton.SubmitButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +43,8 @@ import java.util.Map;
 public class AddressDetail extends AppCompatActivity {
     EditText edit_name,edit_phone,edit_address,edit_email,edit_lastname;
     String total_Amount="",state="Normal";
-    Button btn;
+    //Button btn;
+    SubmitButton btn;
     ORDERINFO orderinfo;
     DatabaseReference databaseReference;
     CUSTOMERINFO customerinfo;
@@ -64,8 +66,7 @@ public class AddressDetail extends AppCompatActivity {
         edit_phone=(EditText)findViewById(R.id.your_number);
         edit_address=(EditText)findViewById(R.id.your_address);
         edit_email=(EditText)findViewById(R.id.your_email);
-        edit_lastname=(EditText)findViewById(R.id.last_name);
-        btn=(Button)findViewById(R.id.btn);
+        btn=(SubmitButton) findViewById(R.id.btn);
         String o=getIntent().getStringExtra("orderinfo");
         orderinfo=new Gson().fromJson(o,ORDERINFO.class);
 
@@ -90,10 +91,6 @@ public class AddressDetail extends AppCompatActivity {
         if (TextUtils.isEmpty(name)){
             edit_name.setError("Enter your name");
             edit_name.requestFocus();
-        }
-        else if (TextUtils.isEmpty(last_name)){
-            edit_lastname.setError("Please enter your last or surname");
-            edit_lastname.requestFocus();
         }
         else if (TextUtils.isEmpty(phone)){
             edit_phone.setError("Enter your Phone Number");

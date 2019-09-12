@@ -239,8 +239,22 @@
 
                         </LinearLayout>
                     </LinearLayout>
+
                 </ScrollView>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textAlignment="textStart"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:fontFamily="@font/montserratbold"
+            android:id="@+id/emailCompany"
+            android:visibility="gone"
+            />
     </LinearLayout>
 </ScrollView>

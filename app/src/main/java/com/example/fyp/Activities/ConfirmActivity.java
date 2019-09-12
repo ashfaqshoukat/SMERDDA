@@ -44,8 +44,8 @@ public class ConfirmActivity extends AppCompatActivity {
         button_confirm= findViewById(R.id.confirm);
         txt_total= findViewById(R.id.totalPrice);
         txt_name.setText(orderinfo.getProductName());
-        txt_price.setText(orderinfo.getProductPrice()+"");
-        txt_total.setText(orderinfo.getProductPrice()*orderinfo.getProductQty()+"");
+        txt_price.setText("$"+orderinfo.getProductPrice()+"");
+        txt_total.setText("$"+orderinfo.getProductPrice()*orderinfo.getProductQty()+"");
         txt_quan.setText(orderinfo.getProductQty()+"");
 //        GetDetails();
 //        GetAllDetails();

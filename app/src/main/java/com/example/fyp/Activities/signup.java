@@ -237,12 +237,6 @@ public class signup extends AppCompatActivity {
 
             return false;
         }
-        if (TextUtils.isEmpty(et_phonenbr.getText().toString())) {
-            et_Password.setError("Phone no required");
-            et_Password.requestFocus();
-
-            return false;
-        }
         if (TextUtils.isEmpty(repass)) {
             et_repass.setError("Re-enter Password");
             et_repass.requestFocus();
@@ -313,7 +307,7 @@ public class signup extends AppCompatActivity {
 
     }
 
-    private void SaveData(String about,String address) {
+    private void SaveData(String about,String address,String emailCompany,String phoneno) {
         Query query = FirebaseDatabase.getInstance().getReference().child("CompanyInfo").orderByChild("compName").equalTo(company);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -334,6 +328,8 @@ public class signup extends AppCompatActivity {
                                 //companyInfo.setPhonenbr(et_phonenbr.getText().toString());
                                 companyInfo.setAbout(about);
                                 companyInfo.setAddress(address);
+                                companyInfo.setEmailCompany(emailCompany);
+                                companyInfo.setPhone(phoneno);
                                // FirebaseDatabase.getInstance().getReference("COMPANYINFO").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(uid).setValue(companyInfo);
                                 FirebaseDatabase.getInstance().getReference("CompanyInfo").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(companyInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -398,7 +394,8 @@ public class signup extends AppCompatActivity {
 
 
                     if(sValue.equalsIgnoreCase(et_CompnayName.getText().toString())){
-                        SaveData(String.valueOf(dsp.child("About").getValue()),String.valueOf(dsp.child("Address").getValue()));
+                        SaveData(String.valueOf(dsp.child("About").getValue()),String.valueOf(dsp.child("Address").getValue()),String.valueOf(dsp.child("emailCompany").getValue())
+                        ,String.valueOf(dsp.child("phone").getValue()));
                         return;
 
                     }
