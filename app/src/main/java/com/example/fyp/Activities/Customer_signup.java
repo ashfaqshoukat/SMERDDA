@@ -1,5 +1,4 @@
 package com.example.fyp.Activities;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 
@@ -32,17 +31,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
-
 public class Customer_signup extends AppCompatActivity {
     EditText edit_user, edit_email, edit_adress, edit_phone, edit_password;
     Button Customer_Signup;
     ImageView arrow_btn;
     DatabaseReference databaseReference;
-    ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
     String userName, email, phoneNo, address, password;
     ProgressDialog proDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,25 +51,33 @@ public class Customer_signup extends AppCompatActivity {
         Customer_Signup = findViewById(R.id.cus_signup);
         arrow_btn = findViewById(R.id.arrow_signup);
         Customer_Signup.setOnClickListener(onClickListener);
-        progressBar = findViewById(R.id.progress_bar);
         databaseReference = FirebaseDatabase.getInstance().getReference("CustomerInfo");
         firebaseAuth = FirebaseAuth.getInstance();
         arrow_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Customer_signup.this, Customer_signin.class));
+                overridePendingTransition(R.anim.go_up, R.anim.go_down);
+                finish();
             }
         });
     }
-
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Registration();
+            Boolean result=Registration();
+            if (result==true){
+                proDialog=new ProgressDialog(Customer_signup.this);
+                proDialog.setMessage("Account is creating..Wait");
+                proDialog.setCancelable(false);
+                proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                proDialog.show();
+            }
+
         }
     };
 
-    private void Registration() {
+    private Boolean Registration() {
         userName = edit_user.getText().toString();
         email = edit_email.getText().toString();
         phoneNo = edit_phone.getText().toString();
@@ -82,31 +86,37 @@ public class Customer_signup extends AppCompatActivity {
         if (TextUtils.isEmpty(userName)) {
             edit_user.setError("User name required");
             edit_user.requestFocus();
+            return false;
         }
         if (TextUtils.isEmpty(email)) {
             edit_email.setError("Email Required");
             edit_email.requestFocus();
+            return false;
         }
         if (TextUtils.isEmpty(password)) {
             edit_password.setError("Password required");
             edit_password.requestFocus();
+            return false;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             edit_email.setError("Enter a valid email");
             edit_email.requestFocus();
-
+            return false;
         }
         if (TextUtils.isEmpty(phoneNo)) {
             edit_phone.setError("Mobile number Required");
             edit_phone.requestFocus();
+            return false;
         }
         if (TextUtils.isEmpty(address)) {
             edit_adress.setError("Address Required");
             edit_adress.requestFocus();
+            return false;
         }
-        if (password.length() < 6) {
+        if (password.length()<6) {
             edit_password.setError("Password greater than six character");
             edit_password.requestFocus();
+            return false;
         }
         Query query1 = FirebaseDatabase.getInstance().getReference().child("CustomerInfo").orderByChild("email").equalTo(email);
         query1.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -121,10 +131,6 @@ public class Customer_signup extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                proDialog.setMessage("Account is creating..Wait");
-                                proDialog.setCancelable(false);
-                                proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                                proDialog.show();
                                 final CUSTOMERINFO customerInfo = new CUSTOMERINFO(userName, email, phoneNo, address, password,"");
                                 FirebaseDatabase.getInstance().getReference("CustomerInfo").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(customerInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -148,14 +154,13 @@ public class Customer_signup extends AppCompatActivity {
                     });
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
-
+return true;
     }
 
     private void sendEmailVerification() {
@@ -170,12 +175,9 @@ public class Customer_signup extends AppCompatActivity {
                         finish();
                         Intent intent = new Intent(Customer_signup.this, Customer_signin.class);
                         startActivity(intent);
-
-
                     }
                 }
             });
         }
     }
-
 }

@@ -78,46 +78,14 @@ public class signin extends AppCompatActivity {
         Signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                company=edit_company.getText().toString();
-                email=edit_email.getText().toString();
-                password=edit_pass.getText().toString();
-                if (TextUtils.isEmpty(company)){
-                    edit_company.setError("Email Required");
-                    edit_company.requestFocus();
+                Boolean sigin=LoginCompany();
+                if (sigin==true){
+                    progressDialog=new ProgressDialog(signin.this);
+                    progressDialog.setMessage("Account is Verifying Wait..");
+                    progressDialog.setCancelable(false);
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.show();
                 }
-                if (TextUtils.isEmpty(email)){
-                    edit_email.setError("Email Required");
-                    edit_email.requestFocus();
-                }
-                if (TextUtils.isEmpty(password)){
-                    edit_pass.setError("Password required");
-                    edit_pass.requestFocus();
-                }
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    edit_email.setError("Enter a valid email");
-                    edit_pass.requestFocus();
-
-                }
-
-
-
-
-
-                mAth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            //progressDialog.dismiss();
-                            MatchMulitCompnayName();
-                            updateFirebaseToken();
-
-
-                        }
-                        else {
-                            Toast.makeText(signin.this,"Login failed",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
             }
         });
         first.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +113,49 @@ public class signin extends AppCompatActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.slideout_right,R.anim.slide_left);
     }
+    private Boolean LoginCompany() {
+        company = edit_company.getText().toString();
+        email = edit_email.getText().toString();
+        password = edit_pass.getText().toString();
+        if (TextUtils.isEmpty(company)) {
+            edit_company.setError("Email Required");
+            edit_company.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(email)) {
+            edit_email.setError("Email Required");
+            edit_email.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(password)) {
+            edit_pass.setError("Password required");
+            edit_pass.requestFocus();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            edit_email.setError("Enter a valid email");
+            edit_pass.requestFocus();
+            return false;
+
+        }
+
+        mAth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    //progressDialog.dismiss();
+                    MatchMulitCompnayName();
+                    updateFirebaseToken();
+
+
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(signin.this, "Login failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        return true;
+    }
     private Boolean checkEmailVerification()
     {
 
@@ -165,11 +176,6 @@ public class signin extends AppCompatActivity {
     }
     private void MatchMulitCompnayName()
     {
-        /* progressDialog=new ProgressDialog(signin.this);
-         progressDialog.setCancelable(false);
-         progressDialog.setMessage("Verified Account.Please wait...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();*/
         DatabaseReference ref1= FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref2;
         ref2 = ref1.child("CompanyInfo");

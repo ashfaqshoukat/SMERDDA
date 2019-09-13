@@ -256,7 +256,7 @@ public class signup extends AppCompatActivity {
             return false;
         }
         if (!repass.equals(password)) {
-            et_Password.setError("Both passwords are not mizatch");
+            et_Password.setError("Both passwords are not match");
             et_Password.requestFocus();
             return false;
         }
@@ -264,47 +264,6 @@ public class signup extends AppCompatActivity {
        SaveCompnayRealm(et_CompnayName.getText().toString());
 
         return true;
-    }
-
-    private void CompnayNames()
-    {
-
-        String sCompnayName = dataList.get(0);
-
-        if (sCompnayName.equals(et_CompnayName.getText().toString()))
-        {
-//            SaveData();
-            return;
-        }
-
-
-        if (!sCompnayName.equals(et_CompnayName.getText().toString()))
-        {
-
-            int nCounter = 0;
-            while (nCounter < dataList.size())
-            {
-                sCompnayName = dataList.get(nCounter);
-
-                if (sCompnayName.equals(et_CompnayName.getText().toString()))
-                {
-//                    SaveData();
-                    break;
-
-                }
-
-
-                nCounter ++;
-            }
-
-            if (! sCompnayName.equals(et_CompnayName.getText().toString()) && nCounter <= dataList.size())
-            {
-                Toast.makeText(signup.this, "Compnay Record not Found", Toast.LENGTH_SHORT).show();
-                progressBar.dismiss();
-            }
-
-        }
-
     }
 
     private void SaveData(String about,String address,String emailCompany,String phoneno) {
@@ -367,12 +326,9 @@ public class signup extends AppCompatActivity {
 
     private void addcheckinfo() {
 
-
         FirebaseDatabase.getInstance().getReference().child("checkinfo").child(FirebaseAuth.getInstance().getUid()).child("info").setValue("company");
 
     }
-
-
     private void MatchMulitCompnayName()
     {
 
@@ -399,21 +355,10 @@ public class signup extends AppCompatActivity {
                         return;
 
                     }
-
-
-
-
-
-
 //                    dataList.add(sValue); //add result into array list
 
                 }
                 Toast.makeText(signup.this, "Compnay Record not Found", Toast.LENGTH_SHORT).show();
-
-//                CompnayNames();
-
-
-
             }
 
             @Override
@@ -422,62 +367,5 @@ public class signup extends AppCompatActivity {
             }
         });
 
-    }
-
-
-
-    public void CompanyInfo() {
-
-        DatabaseReference ref = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child("CompanyInfo");
-
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot zoneSnapshot : snapshot.getChildren()) {
-
-                    //   sCompnyInfoName = zoneSnapshot.child("compName").getValue().toString();
-
-
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-
-        });
-
-
-    }
-
-    public String getMessage(){
-        final AtomicBoolean done = new AtomicBoolean(false);
-        final String[] message1 = new String[0];
-
-        //assuming you have already called firebase initialization code for admin sdk, android etc
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Companies");
-        root.child("company1").child("companyName").addListenerForSingleValueEvent(new ValueEventListener() {
-
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                message1[0] =  dataSnapshot.getValue(String.class);
-                done.set(true);
-            }
-
-            public void onCancelled(DatabaseError error) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-        while (!done.get());
-
-        return message1[0];
     }
 }

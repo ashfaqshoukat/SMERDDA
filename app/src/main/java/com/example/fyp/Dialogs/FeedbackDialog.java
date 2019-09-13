@@ -29,8 +29,6 @@ public class FeedbackDialog extends DialogFragment {
     TextView mTextView2,mButton;
     ImageView mCrossBtn;
     String[][] testData = { {"AVERAGE","NORMAL","LATE","NO"}};
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

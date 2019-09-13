@@ -13,6 +13,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ TextView ed_forgot_pass;
 FirebaseAuth mAth;
 FirebaseUser firebaseUser;
 String email,password;
+ImageView arrow1,arrow2;
 ProgressDialog pd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ ProgressDialog pd;
         cus_signin= findViewById(R.id.cus_signin_btn);
         ed_forgot_pass= findViewById(R.id.forgot_pass);
         cus_signin.setOnClickListener(listener);
+        arrow1=(ImageView)findViewById(R.id.arrow_signin);
+        arrow2=(ImageView)findViewById(R.id.arrowsigninsecond);
         mAth=FirebaseAuth.getInstance();
         firebaseUser=mAth.getCurrentUser();
         if (firebaseUser!=null){
@@ -56,33 +60,57 @@ ProgressDialog pd;
                 startActivity(new Intent(Customer_signin.this, Customer_forgot.class));
             }
         });
+        arrow1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Customer_signin.this,Customer_signup.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.go_up,R.anim.go_down);
+                finish();
+            }
+        });
+        arrow2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Customer_signin.this,Customer_signup.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.go_up,R.anim.go_down);
+                finish();
+            }
+        });
 
     }
     private View.OnClickListener listener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            LoginButton();
-            pd=new ProgressDialog(Customer_signin.this);
-            pd.setMessage("Account Verified...");
-            pd.setCancelable(false);
-            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            pd.show();
+            Boolean loginCustomer=LoginButton();
+            if (loginCustomer==true){
+                pd=new ProgressDialog(Customer_signin.this);
+                pd.setMessage("Account Verified...");
+                pd.setCancelable(false);
+                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pd.show();
+            }
+
         }
     };
-    private void LoginButton(){
+    private Boolean LoginButton(){
         email=et_cus_email.getText().toString();
         password=et_cus_pass.getText().toString();
         if (TextUtils.isEmpty(email)){
             et_cus_email.setError("Email Required");
             et_cus_email.requestFocus();
+            return false;
         }
         if (TextUtils.isEmpty(password)){
             et_cus_pass.setError("Password required");
             et_cus_pass.requestFocus();
+            return false;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             et_cus_email.setError("Enter a valid email");
             et_cus_email.requestFocus();
+            return false;
 
         }
         mAth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -96,10 +124,11 @@ ProgressDialog pd;
                     pd.dismiss();
                     Toast.makeText(Customer_signin.this,"Please first registered yourself",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(Customer_signin.this,Customer_signup.class);
+                    startActivity(intent);
                 }
             }
         });
-
+return true;
     }
     private void checkEmailVerification(){
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
